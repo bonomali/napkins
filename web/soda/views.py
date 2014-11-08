@@ -6,8 +6,9 @@ from django.contrib.auth import login, authenticate, logout as lgout
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth.models import User as SysUser
+import datetime
 from soda.models import *
-from soda.form import signup_form, signin_form
+from soda.form import signup_form, signin_form, profile_form
 
 def index(request):
 	context = {}
@@ -18,10 +19,18 @@ def search(request):
 	context['companies'] = Company.objects.all()
 	return render(request, 'search.html', context)
 
-def company(request, company_id=None):
+def company(request, company_id):
 	context = {}
 	context['company'] = Company.objects.filter(id=company_id)[0]
 	return render(request, 'company.html', context)
+
+@login_required(login_url='/signin/')
+def apply(request, company_id):
+	user = User.objects.get(email=request.user)
+	company = Company.objects.filter(id=company_id)[0]
+	if not user.profile:
+		return HttpResponseRedirect('/profile/')
+	return HttpResponse("LOL, so we didnt do this part.")
 
 def signup(request):
 	if request.method == 'GET':
@@ -61,8 +70,43 @@ def signin(request):
 			return HttpResponseRedirect('/search/')
 		return HttpResponseRedirect('/signin/')
 
+def logout(request):
+	lgout(request)
+	return HttpResponseRedirect('/search/')
+
+@login_required(login_url='/signin/')
 def profile(request):
-	context = {}
-	return render(request, 'profile.html', context)
-
-
+	user = User.objects.get(email=request.user)
+	if request.method == "GET":
+		form = profile_form()
+		if user.profile:
+			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'graduation_date': user.profile.graduation_date, 'resume': user.profile.resume})
+			#'start_date': user.plan.start_date.strftime('%Y-%m-%d')})
+		context = {'form' : form}
+		return render(request, 'profile.html', context)
+	elif request.method == 'POST':
+		form = profile_form(request.POST)
+		github_url = request.POST['github_url']
+		linkedin_url = request.POST['linkedin_url']
+		personal_site_url = request.POST['personal_site_url']
+		phone = request.POST['phone']
+		college = request.POST['college']
+		gpa = request.POST['gpa']
+		graduation_date = datetime.datetime.strptime(request.POST['graduation_date'], "%Y-%m-%d").date()
+		resume = request.FILES['resume']
+		profile = Profile()
+		if user.profile:
+			profile = user.profile
+		else:
+			user.profile = profile
+		profile.linkedin_url = linkedin_url
+		profile.github_url = github_url
+		profile.personal_site_url = personal_site_url
+		profile.phone = phone
+		profile.college = college
+		profile.gpa = gpa
+		profile.graduation_date = graduation_date
+		profile.resume = resume
+		profile.save()
+		user.save()
+		return HttpResponseRedirect('/search/')
