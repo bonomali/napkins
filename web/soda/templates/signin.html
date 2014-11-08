@@ -1,0 +1,12 @@
+		<main class="index" role="main">
+            <div class="index-container" style="max-width: 300px">
+                <p class="lead">Sign In</p>
+                <form action="/signin/" method="post">
+                {% csrf_token %}
+                    {% for field in form %}
+                        <input class="form-control" style="margin-bottom: 25px;color: black; border-bottom: 1px dotted #FFF" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                    {% endfor %}
+                    <input type="submit" style="margin-top: 20px; height: 40px; padding: 8px 0px; width: 120px; font-size: 14px" class="btn btn-outline-inverse btn-lg" value="Sign In" />
+                </form>
+            </div>
+        </main>

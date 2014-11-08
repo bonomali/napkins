@@ -1,0 +1,6 @@
+<p>this is where we show company logos and stuff</p>
+{% for company in companies %}
+	<a href="/company/{{company.id}}" target="_blank"><div style="float:left; height:100px; width:100px; display:block;">
+		<p>{{company.name}}</p>
+	</div></a>
+{% endfor %}
