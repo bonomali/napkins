@@ -8,7 +8,8 @@ from django.contrib import auth
 from django.contrib.auth.models import User as SysUser
 import datetime
 from soda.models import *
-from soda.form import signup_form, signin_form, profile_form
+from soda.form import signup_form, signin_form, profile_form, emaillist_form
+from soda.email import company_app_data_email
 
 def index(request):
 	context = {}
@@ -17,6 +18,8 @@ def index(request):
 def search(request):
 	context = {}
 	context['companies'] = Company.objects.all()
+	form = emaillist_form()
+	context['form'] = form
 	return render(request, 'search.html', context)
 
 def company(request, company_id):
@@ -110,3 +113,11 @@ def profile(request):
 		profile.save()
 		user.save()
 		return HttpResponseRedirect('/search/')
+
+def emaillist(request):
+	if request.method == 'POST':
+		email = request.POST['email']
+		emailMem = EmailList(email=email)
+		emailMem.save()
+		company_app_data_email(email)
+		return HttpResponse("We hv sent the list! Happy job surfing!")

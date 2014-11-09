@@ -19,3 +19,6 @@ class profile_form(forms.Form):
 	gpa = forms.CharField(required=True, label='gpa', max_length=10)
 	graduation_date = forms.DateTimeField(required=True, label='graduation_date %Y-%m-%d')
 	resume = forms.FileField(required=True)
+
+class emaillist_form(forms.Form):
+	email = forms.CharField(required=True, label='email')
