@@ -33,6 +33,14 @@ def apply(request, company_id):
 	company = Company.objects.filter(id=company_id)[0]
 	if not user.profile:
 		return HttpResponseRedirect('/profile/')
+	# import requests
+	# from multiprocessing.dummy import Pool
+	# pool = Pool(processes=1)
+	# def ok():
+	# 	url = 'http://127.0.0.1:8000/fill'
+	# 	param = {'user':":LASDASDAS"}
+	# 	r = requests.get(url, params=param)
+	# pool.apply_async(ok)
 	return HttpResponse("LOL, so we didnt do this part.")
 
 def signup(request):

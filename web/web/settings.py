@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'storages',
     'soda',
+    'dwinelle',
 )
 
 MIDDLEWARE_CLASSES = (

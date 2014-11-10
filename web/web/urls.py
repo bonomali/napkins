@@ -5,4 +5,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^', include('soda.urls')),
+    url(r'^', include('dwinelle.urls')),
 )
