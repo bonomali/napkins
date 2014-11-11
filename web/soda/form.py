@@ -17,7 +17,9 @@ class profile_form(forms.Form):
 	phone = forms.CharField(required=True, label='phone #', max_length=50)
 	college = forms.CharField(required=True, label='college', max_length=50)
 	gpa = forms.CharField(required=True, label='gpa', max_length=10)
-	graduation_date = forms.DateTimeField(required=True, label='graduation_date %Y-%m-%d')
+	address = forms.CharField(required=True, label='address', max_length=30)
+	city = forms.CharField(required=True, label='city', max_length=30)
+	zipcode = forms.CharField(required=True, label='zipcode', max_length=30)
 	resume = forms.FileField(required=True)
 
 class emaillist_form(forms.Form):

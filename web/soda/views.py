@@ -62,7 +62,7 @@ def signup(request):
 			system_user.save()
 			our_user = User(first_name=first_name, last_name=last_name, email=email, password=password)
 			our_user.save()
-			return HttpResponseRedirect('/search')
+			return HttpResponseRedirect('/signin')
         return HttpResponseRedirect('/signup')
 
 def signin(request):
@@ -91,8 +91,7 @@ def profile(request):
 	if request.method == "GET":
 		form = profile_form()
 		if user.profile:
-			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'graduation_date': user.profile.graduation_date, 'resume': user.profile.resume})
-			#'start_date': user.plan.start_date.strftime('%Y-%m-%d')})
+			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'resume': user.profile.resume})
 		context = {'form' : form}
 		return render(request, 'profile.html', context)
 	elif request.method == 'POST':
@@ -103,7 +102,9 @@ def profile(request):
 		phone = request.POST['phone']
 		college = request.POST['college']
 		gpa = request.POST['gpa']
-		graduation_date = datetime.datetime.strptime(request.POST['graduation_date'], "%Y-%m-%d").date()
+		address = request.POST['address']
+		city = request.POST['city']
+		zipcode = request.POST['zipcode']
 		resume = request.FILES['resume']
 		profile = Profile()
 		if user.profile:
@@ -116,10 +117,14 @@ def profile(request):
 		profile.phone = phone
 		profile.college = college
 		profile.gpa = gpa
-		profile.graduation_date = graduation_date
+		profile.address = address
+		profile.city = city
+		profile.zipcode = zipcode
 		profile.resume = resume
 		profile.save()
 		user.save()
+		print user.profile
+		print not user.profile
 		return HttpResponseRedirect('/search/')
 
 def emaillist(request):

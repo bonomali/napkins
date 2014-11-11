@@ -1,26 +1,61 @@
 import jsonpickle
+import urllib
+import uuid
+import os
 
 class UserPlain():
-	def __init__(self, user):
-		self.first_name = user.first_name
-		self.last_name = user.last_name
-		self.email = user.email
-		self.github_url = user.profile.github_url
-		self.linkedin_url = user.profile.linkedin_url
-		self.personal_site_url = user.profile.personal_site_url
-		self.phone = user.profile.phone
-		self.college = user.profile.college
-		self.gpa = user.profile.gpa
-		self.graduation_date = user.profile.graduation_date
-		self.resume = user.profile.resume.url
 
-	def getField(string):
-		if string == "full name":
+	def __init__(self, user=None):
+		if user:
+			self.first_name = user.first_name
+			self.last_name = user.last_name
+			self.email = user.email
+			self.github_url = user.profile.github_url
+			self.linkedin_url = user.profile.linkedin_url
+			self.personal_site_url = user.profile.personal_site_url
+			self.phone = user.profile.phone
+			self.college = user.profile.college
+			self.gpa = user.profile.gpa
+			self.resume = self.getResume(user.profile.resume.url)
+			self.address = user.profile.address
+			self.city = user.profile.city
+			self.zipcode = user.profile.zipcode
+
+	def getResume(self, url):
+		testfile = urllib.URLopener()
+		filecode = "media/" + str(uuid.uuid4()) + ".pdf"
+		testfile.retrieve(url, filecode)
+		return filecode #this is the directory
+
+	def deleteResume(self):
+		os.remove(self.resume)
+
+	def getField(self, num):
+		if num == 1.1:
+			return self.first_name
+		elif num == 1.2:
+			return self.last_name
+		elif num == 1:
 			return self.first_name + " " + self.last_name
+		elif num == 2:
+			return self.email
+		elif num == 3:
+			return self.phone
+		elif num == 4:
+			return self.college
+		elif num == 5:
+			return self.gpa
+		elif num == 6:
+			return self.resume
+		elif num == 7:
+			return self.address
+		elif num == 8:
+			return self.city
+		elif num == 9:
+			return self.zipcode
 
 def UserToJson(user):
 	return jsonpickle.encode(user)
 
 def JsonToUser(json):
 	return jsonpickle.decode(json)
-

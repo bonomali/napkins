@@ -23,16 +23,18 @@ def upload_resume_to(instance, filename):
     )
 
 class Profile(models.Model):
-	github_url = models.CharField(max_length=50)
-	linkedin_url = models.CharField(max_length=50)
-	personal_site_url = models.CharField(max_length=50)
+    github_url = models.CharField(max_length=50)
+    linkedin_url = models.CharField(max_length=50)
+    personal_site_url = models.CharField(max_length=50)
 
-	phone = models.CharField(max_length=50)
-	college = models.CharField(max_length=50)
-	gpa = models.CharField(max_length=10)
-	graduation_date = models.DateTimeField()
+    phone = models.CharField(max_length=50)
+    college = models.CharField(max_length=50)
+    gpa = models.CharField(max_length=10)
+    address = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    zipcode = models.CharField(max_length=30)
 
-	resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True)
+    resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True)
 
 class EmailList(models.Model):
     email = models.CharField(max_length=50)
