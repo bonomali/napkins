@@ -1,3 +1,6 @@
+from splinter.browser import Browser
+import time
+
 class Form:
 	def __init__(self,url):
 		self.url = url
@@ -20,7 +23,7 @@ class Form:
 	def setFinalSubmit(self,val):
 		self.finalSubmit = val
 
-def fill(user, form):
+def form_fill(user, form):
 	browser = Browser()
 	browser.visit(form.url)
 	def doClicks(): #partial_htmls being dealt with
@@ -44,6 +47,8 @@ def fill(user, form):
 	dropDownField()
 	dropDownHelper()
 	browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[0].click()')
+	time.sleep(10)
+	browser.quit()
 
 Counsyl = Form("https://www.counsyl.com/careers/software-engineer-new-grad-2015/")
 Counsyl.addClicks("https://jobs.lever.co/counsyl/")
@@ -86,3 +91,12 @@ Quora.addFillField('email',2)
 Quora.addAttachField('resume',6)
 Quora.addFillField('phone',3)
 Quora.setFinalSubmit('template-btn-submit')
+
+Box = Form("https://jobs.lever.co/box/c0aba64f-7d5d-4e52-b1eb-03460b0f34a6/apply")
+Box.addFillField('name',1)
+Box.addFillField('email',2)
+Box.addAttachField('resume',6)
+Box.addFillField('phone',3)
+Box.setFinalSubmit('template-btn-submit')
+
+form_dict = {'Quora':Quora, 'Box':Box, 'Palentir':Palentir, 'Counsyl':Counsyl, 'Affirm':Affirm}

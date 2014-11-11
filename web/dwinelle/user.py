@@ -16,16 +16,17 @@ class UserPlain():
 			self.phone = user.profile.phone
 			self.college = user.profile.college
 			self.gpa = user.profile.gpa
-			self.resume = self.getResume(user.profile.resume.url)
+			self.resume_url = user.profile.resume.url
 			self.address = user.profile.address
 			self.city = user.profile.city
 			self.zipcode = user.profile.zipcode
 
-	def getResume(self, url):
+	def getResume(self):
+		url = self.resume_url
 		testfile = urllib.URLopener()
 		filecode = "media/" + str(uuid.uuid4()) + ".pdf"
 		testfile.retrieve(url, filecode)
-		return filecode #this is the directory
+		self.resume = filecode
 
 	def deleteResume(self):
 		os.remove(self.resume)

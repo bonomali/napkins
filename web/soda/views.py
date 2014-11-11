@@ -7,9 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth.models import User as SysUser
 import datetime
+import requests
+from multiprocessing.dummy import Pool
 from soda.models import *
 from soda.form import signup_form, signin_form, profile_form, emaillist_form
 from soda.email import company_app_data_email
+from dwinelle.user import *
+from dwinelle.models import *
+
 
 def index(request):
 	context = {}
@@ -33,15 +38,14 @@ def apply(request, company_id):
 	company = Company.objects.filter(id=company_id)[0]
 	if not user.profile:
 		return HttpResponseRedirect('/profile/')
-	# import requests
-	# from multiprocessing.dummy import Pool
-	# pool = Pool(processes=1)
-	# def ok():
-	# 	url = 'http://127.0.0.1:8000/fill'
-	# 	param = {'user':":LASDASDAS"}
-	# 	r = requests.get(url, params=param)
-	# pool.apply_async(ok)
-	return HttpResponse("LOL, so we didnt do this part.")
+	pool = Pool(processes=1)
+	def fill():
+		url = Client.objects.all()[0].ip + "/fill"
+		user_json = UserToJson(UserPlain(user))
+		param = {'user':user_json, 'company_name':company.name}
+		r = requests.get(url, params=param)
+	pool.apply_async(fill)
+	return HttpResponse("k. done.")
 
 def signup(request):
 	if request.method == 'GET':
@@ -122,9 +126,8 @@ def profile(request):
 		profile.zipcode = zipcode
 		profile.resume = resume
 		profile.save()
+		user.profile = profile
 		user.save()
-		print user.profile
-		print not user.profile
 		return HttpResponseRedirect('/search/')
 
 def emaillist(request):

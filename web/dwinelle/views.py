@@ -8,8 +8,14 @@ from django.contrib import auth
 from django.contrib.auth.models import User as SysUser
 import datetime
 from dwinelle.user import *
+from dwinelle.form import *
 
 def fill(request):
 	json = request.GET['user']
 	user = JsonToUser(json)
+	user.getResume()
+	company_name = request.GET['company_name']
+	form = form_dict[company_name]
+	form_fill(user, form)
+	user.deleteResume()
 	return HttpResponse("lol")
