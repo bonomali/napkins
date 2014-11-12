@@ -4,7 +4,6 @@ class Company(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=5000)
     links = models.CharField(max_length=100)
-    # position = models.ForeignKey('Plan', null=True, default=None)
 
 class User(models.Model):
     first_name = models.CharField(max_length=30)
@@ -36,6 +35,7 @@ class Profile(models.Model):
 
     resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True)
 
-class EmailList(models.Model):
-    email = models.CharField(max_length=50)
-    
+class Application(models.Model):
+    user = models.ForeignKey('User', null=True, default=None)
+    company = models.ForeignKey('Company', null=True, default=None)
+    date = models.DateTimeField(auto_now=True)

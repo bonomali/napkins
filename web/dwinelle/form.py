@@ -1,6 +1,7 @@
 from splinter.browser import Browser
 from pyvirtualdisplay import Display 
 import time
+import os
 
 class Form:
 	def __init__(self,url):
@@ -37,7 +38,7 @@ def form_fill(user, form):
 			browser.fill(ele,user.getField(field))
 	def attachField():
 		for ele, field in form.Attach_Fields.iteritems():
-			browser.attach_file(ele,user.getField(field))
+			browser.attach_file(ele,os.getcwd() + "/" + user.getField(field))
 	def dropDownField():
 		for ele, index in form.Drop_Down_Fields.iteritems():
 			browser.execute_script('document.getElementById("' + ele + '")[' + str(index) + '].selected=true')

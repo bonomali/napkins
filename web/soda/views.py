@@ -15,7 +15,6 @@ from soda.email import company_app_data_email
 from dwinelle.user import *
 from dwinelle.models import *
 
-
 def index(request):
 	context = {}
 	return render(request, 'index.html', context)
@@ -25,6 +24,7 @@ def search(request):
 	context['companies'] = Company.objects.all()
 	form = emaillist_form()
 	context['form'] = form
+	context['user'] = request.user
 	return render(request, 'search.html', context)
 
 def company(request, company_id):
@@ -40,11 +40,13 @@ def apply(request, company_id):
 		return HttpResponseRedirect('/profile/')
 	pool = Pool(processes=1)
 	def fill():
-		url = Client.objects.all()[0].ip + "/fill"
+		url = Client.objects.all()[0].ip + "fill"
 		user_json = UserToJson(UserPlain(user))
 		param = {'user':user_json, 'company_name':company.name}
 		r = requests.get(url, params=param)
 	pool.apply_async(fill)
+	app = Application(user=user, company=company)
+	app.save()
 	return HttpResponse("k. done.")
 
 def signup(request):
@@ -130,10 +132,10 @@ def profile(request):
 		user.save()
 		return HttpResponseRedirect('/search/')
 
-def emaillist(request):
-	if request.method == 'POST':
-		email = request.POST['email']
-		emailMem = EmailList(email=email)
-		emailMem.save()
-		company_app_data_email(email)
-		return HttpResponse("We hv sent the list! Happy job surfing!")
+@login_required(login_url='/signin/')
+def history(request):
+	user = User.objects.get(email=request.user)
+	apps = Application.objects.filter(user=user).order_by('-date')
+	context = {}
+	context['apps'] = apps
+	return render(request, 'history.html', context)

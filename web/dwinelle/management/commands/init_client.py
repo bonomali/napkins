@@ -8,7 +8,8 @@ class Command(BaseCommand):
     	for past_ip in past_ips:
     		past_ip.delete()
     	ip = "http://127.0.0.1:8001/"
-    	if len(sys.argv) > 1:
-    		ip = sys.argv[1]
-    	client = Client(ip=ip)
-    	client.save()
+    	if len(sys.argv) > 2:
+    		ip = sys.argv[2]
+    	c = Client()
+    	c.ip = ip
+    	c.save()

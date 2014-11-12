@@ -12,3 +12,4 @@ javascripts/bundles
 stylesheets/bundles
 
 web/web/private_settings.py
+web/media/*
