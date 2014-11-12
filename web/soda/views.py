@@ -38,6 +38,8 @@ def apply(request, company_id):
 	company = Company.objects.filter(id=company_id)[0]
 	if not user.profile:
 		return HttpResponseRedirect('/profile/')
+	if user.num_apps_left_today == 0:
+		return HttpResponse("sorry, you have exceeded max number of apps available per day. We are forced to have a cap because of limited server capabilities.")
 	pool = Pool(processes=1)
 	def fill():
 		url = Client.objects.all()[0].ip + "fill"
@@ -47,7 +49,9 @@ def apply(request, company_id):
 	pool.apply_async(fill)
 	app = Application(user=user, company=company)
 	app.save()
-	return HttpResponse("k. done.")
+	user.num_apps_left_today -= 1
+	user.save()
+	return HttpResponse("k. done. check your email for confirmation from the company.")
 
 def signup(request):
 	if request.method == 'GET':
