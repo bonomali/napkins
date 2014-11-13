@@ -22,6 +22,10 @@ def index(request):
 	context = {}
 	return render(request, 'index.html', context)
 
+def about(request):
+	context = {}
+	return render(request, 'about.html', context)
+
 @login_required(login_url='/signin/')
 def search(request):
 	context = {}
