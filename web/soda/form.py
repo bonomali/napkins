@@ -20,7 +20,7 @@ class profile_form(forms.Form):
 	address = forms.CharField(required=True, label='address', max_length=30)
 	city = forms.CharField(required=True, label='city', max_length=30)
 	zipcode = forms.CharField(required=True, label='zipcode', max_length=30)
-	resume = forms.FileField(required=True)
+	resume = forms.FileField(required=True, label='resume')
 
 class emaillist_form(forms.Form):
 	email = forms.CharField(required=True, label='email')

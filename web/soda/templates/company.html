@@ -1,7 +1,44 @@
-<p>{{company.name}}</p>
-<p>{{company.description}}</p>
-<!-- <a href="{{company.links}}">apply</a> -->
-
-<form action="/apply/{{company.id}}">
-    <input type="submit" value="Apply">
-</form>
+<!DOCTYPE html>
+<html lang="en" class="index">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>napkin</title>
+        <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/qurse.css" rel="stylesheet">
+    </head>
+    <body class="index">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+        </script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <header class="navbar navbar-static-top" id="top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a href="../" class="navbar-brand">Napkin</a>
+            </div>
+            <nav class="collapse navbar-collapse navbar-collapse" role="navigation" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+<!--                     <li><a href="/">About</a></li>
+                    <li><a href="/signin">Sign In</a></li> -->
+                </ul>
+            </nav>
+        </header>
+        <main class="index" role="main" >
+            <div class="index-container">
+            	<p class="lead" style="font-size:40px;">{{ company.name }}</p>
+                <p class="lead">{{ company.description }}</p>
+                <p class="lead">
+                    <a href="/apply/{{company.id}}" class="btn btn-outline-inverse btn-lg">Apply</a>
+                </p>
+            </div>
+        </main>
+    </body>
+</html>

@@ -16,9 +16,13 @@ from dwinelle.user import *
 from dwinelle.models import *
 
 def index(request):
+	user = User.objects.filter(email=request.user)
+	if user:
+		return HttpResponseRedirect("/search/")
 	context = {}
 	return render(request, 'index.html', context)
 
+@login_required(login_url='/signin/')
 def search(request):
 	context = {}
 	context['companies'] = Company.objects.all()
@@ -27,6 +31,7 @@ def search(request):
 	context['user'] = request.user
 	return render(request, 'search.html', context)
 
+@login_required(login_url='/signin/')
 def company(request, company_id):
 	context = {}
 	context['company'] = Company.objects.filter(id=company_id)[0]
@@ -39,7 +44,9 @@ def apply(request, company_id):
 	if not user.profile:
 		return HttpResponseRedirect('/profile/')
 	if user.num_apps_left_today == 0:
-		return HttpResponse("sorry, you have exceeded max number of apps available per day. We are forced to have a cap because of limited server capabilities.")
+		context = {}
+		context['message'] = 'Sorry, you have exceeded max number of apps available per day. We are forced to have a cap because of limited server capabilities.'
+		return render(request, 'thankyou.html', context)
 	pool = Pool(processes=1)
 	def fill():
 		url = Client.objects.all()[0].ip + "fill"
@@ -51,7 +58,9 @@ def apply(request, company_id):
 	app.save()
 	user.num_apps_left_today -= 1
 	user.save()
-	return HttpResponse("k. done. check your email for confirmation from the company.")
+	context = {}
+	context['message'] = 'Thanks for applying. Our automated system will be filling out your app in the next 10 mins. Check your email for confirmation.'
+	return render(request, 'thankyou.html', context)
 
 def signup(request):
 	if request.method == 'GET':
@@ -93,7 +102,7 @@ def signin(request):
 
 def logout(request):
 	lgout(request)
-	return HttpResponseRedirect('/search/')
+	return HttpResponseRedirect('/')
 
 @login_required(login_url='/signin/')
 def profile(request):
@@ -101,7 +110,7 @@ def profile(request):
 	if request.method == "GET":
 		form = profile_form()
 		if user.profile:
-			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'resume': user.profile.resume})
+			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'address': user.profile.address, 'city': user.profile.city, 'zipcode': user.profile.zipcode,'resume': user.profile.resume})
 		context = {'form' : form}
 		return render(request, 'profile.html', context)
 	elif request.method == 'POST':
