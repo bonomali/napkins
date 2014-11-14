@@ -48,13 +48,13 @@
                                 </li>
                             </ul>
                         </aside>
-                        <div id="main">
+                        <div id="main" style="width:600px;">
                             <table class="listing">
                                 <thead>
                                     <tr>
                                         <th>Date</th>     
                                         <th>Company</th>
-                                        <th>Received</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +62,7 @@
 									<tr>
                                         <td>{{app.date}}</td>
                                         <td>{{app.company.name}}</td>
-                                        <!-- <td></td> -->
+                                        <td>{{app.status}}</td>
                                     </tr>
 								{% endfor %}
                                 </tbody>

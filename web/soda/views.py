@@ -51,17 +51,17 @@ def apply(request, company_id):
 		context = {}
 		context['message'] = 'Sorry, you have exceeded max number of apps available per day. We are forced to have a cap because of limited server capabilities.'
 		return render(request, 'thankyou.html', context)
-	pool = Pool(processes=1)
-	def fill():
-		url = Client.objects.all()[0].ip + "fill"
-		user_json = UserToJson(UserPlain(user))
-		param = {'user':user_json, 'company_name':company.name}
-		r = requests.get(url, params=param)
-	pool.apply_async(fill)
 	app = Application(user=user, company=company)
 	app.save()
 	user.num_apps_left_today -= 1
 	user.save()
+	pool = Pool(processes=1)
+	def fill():
+		url = Client.objects.all()[0].ip + "fill"
+		user_json = UserToJson(UserPlain(user))
+		param = {'user':user_json, 'company_name':company.name, 'app_id':app.id}
+		r = requests.get(url, params=param)
+	pool.apply_async(fill)
 	context = {}
 	context['message'] = 'Thanks for applying. Our automated system will be filling out your app in the next 10 mins. Check your email for confirmation.'
 	return render(request, 'thankyou.html', context)
@@ -156,3 +156,10 @@ def history(request):
 	context = {}
 	context['apps'] = apps
 	return render(request, 'history.html', context)
+
+def confirm_app(request):
+	app_id = request.GET['app_id']
+	app = Application.objects.filter(id=app_id)[0]
+	app.status = request.GET['status']
+	app.save()
+	return HttpResponse("yay")

@@ -41,3 +41,4 @@ class Application(models.Model):
     user = models.ForeignKey('User', null=True, default=None)
     company = models.ForeignKey('Company', null=True, default=None)
     date = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=30, default="pending")

@@ -8,7 +8,10 @@ from django.contrib import auth
 from django.contrib.auth.models import User as SysUser
 import datetime
 from dwinelle.user import *
+from dwinelle.models import *
 from dwinelle.form import *
+import requests
+from multiprocessing.dummy import Pool
 
 def fill(request):
 	json = request.GET['user']
@@ -18,4 +21,10 @@ def fill(request):
 	form = form_dict[company_name]
 	form_fill(user, form)
 	user.deleteResume()
+	pool = Pool(processes=1)
+	def fill():
+		url = Server.objects.all()[0].ip + "confirm_app"
+		param = {'app_id':request.GET['app_id'], 'status':"success"}
+		r = requests.get(url, params=param)
+	pool.apply_async(fill)
 	return HttpResponse("lol")
