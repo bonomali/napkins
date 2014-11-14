@@ -14,6 +14,7 @@ from soda.models import *
 from soda.form import signup_form, signin_form, profile_form, emaillist_form
 from dwinelle.user import *
 from dwinelle.models import *
+from soda.email import *
 
 def index(request):
 	user = User.objects.filter(email=request.user)
@@ -28,7 +29,9 @@ def about(request):
 
 @login_required(login_url='/signin/')
 def search(request):
+	user = User.objects.get(email=request.user)
 	context = {}
+	context['num_apps_left_today'] = user.num_apps_left_today
 	context['companies'] = Company.objects.all()
 	form = emaillist_form()
 	context['form'] = form

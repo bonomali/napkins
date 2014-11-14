@@ -5,7 +5,7 @@ class Company(models.Model):
     description = models.CharField(max_length=5000)
     links = models.CharField(max_length=100)
 
-daily_allowed_apps = 3
+daily_allowed_apps = 5
 class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)

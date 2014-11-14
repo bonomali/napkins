@@ -49,6 +49,7 @@
                             </ul>
                         </aside>
                         <div id="main">
+                        <p style="color:#666; margin-bottom:15px;"># automated applications left today: {{ num_apps_left_today }}</p>
 						{% for company in companies %}
 							<a href="/company/{{company.id}}" style="margin-right:10px;"><div style="float:left; height:100px; width:120px; display:block;">
 							<p class="listing">{{company.name}}</p>
