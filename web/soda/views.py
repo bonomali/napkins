@@ -7,11 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth.models import User as SysUser
 import datetime
+import random
 import requests
 from multiprocessing.dummy import Pool
 from soda.models import *
 from soda.form import signup_form, signin_form, profile_form, emaillist_form
-from soda.email import company_app_data_email
 from dwinelle.user import *
 from dwinelle.models import *
 
@@ -57,7 +57,7 @@ def apply(request, company_id):
 	user.save()
 	pool = Pool(processes=1)
 	def fill():
-		url = Client.objects.all()[0].ip + "fill"
+		url = random.choice(Client.objects.all()).ip + "fill"
 		user_json = UserToJson(UserPlain(user))
 		param = {'user':user_json, 'company_name':company.name, 'app_id':app.id}
 		r = requests.get(url, params=param)
