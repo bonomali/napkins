@@ -131,7 +131,9 @@ def profile(request):
 		address = request.POST['address']
 		city = request.POST['city']
 		zipcode = request.POST['zipcode']
-		resume = request.FILES['resume']
+		has_resume = 'resume' in request.FILES.keys()
+		if has_resume:
+			resume = request.FILES['resume']
 		profile = Profile()
 		if user.profile:
 			profile = user.profile
@@ -146,7 +148,8 @@ def profile(request):
 		profile.address = address
 		profile.city = city
 		profile.zipcode = zipcode
-		profile.resume = resume
+		if has_resume:
+			profile.resume = resume
 		profile.save()
 		user.profile = profile
 		user.save()

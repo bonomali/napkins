@@ -2,6 +2,7 @@ from splinter.browser import Browser
 from pyvirtualdisplay import Display 
 import time
 import os
+from soda.email import email_send
 
 class Form:
 	def __init__(self,url):
@@ -12,6 +13,9 @@ class Form:
 		self.Drop_Down_Fields = {}
 		self.Drop_Down_Fields_Helper = {}
 		self.finalSubmit = None
+		self.email = {}
+	def addEmail(self,em):
+		self.email = em
 	def addClicks(self, button_name):
 		self.html_button_clicks.append(button_name)
 	def addFillField(self, html_ele, field_num):
@@ -28,6 +32,11 @@ class Form:
 def form_fill(user, form):
 	display = Display(visible=0, size=(800, 600))
 	display.start()
+	if form.email != {}:
+		st = "Hello " + form.email["name"] +",\nMy name is " + user.getField(1)  +  " and I am currently a student at " + user.getField(4) + ". I am applying for the Software Engineering Internship position for summer 2015. I can be reached at " + user.getField(2) + " or " + user.getField(3)+ ".\
+		\nBest,\n" + user.getField(1)
+		email_send("Software Internship Application",st,[form.email['email']],attachment=user.getField(6))
+		return
 	browser = Browser()
 	browser.visit(form.url)
 	def doClicks(): #partial_htmls being dealt with
@@ -67,22 +76,6 @@ Counsyl.addAttachField('resume',6)
 Counsyl.addAttachField('cards[86665ab6-19bd-4fd0-a466-96f3acc9ccb9][field0]',6)
 Counsyl.setFinalSubmit('template-btn-submit')
 
-Palantir = Form("http://www.palantir.com/careers/OpenPosApply?id=a0m80000000Lkdw")
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id20',1.1) #First Name
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id28',1.2)
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id32',7)
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id36',8)
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id44',9)
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id52',2)
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id56',3)
-Palantir.addFillField('page:OpenPositionTemplate:j_id16:j_id76',4)
-Palantir.addAttachField('page:OpenPositionTemplate:j_id16:j_id84:ipnputFile:file',6)
-Palantir.addDropDownField('page:OpenPositionTemplate:j_id16:j_id40',5)
-Palantir.addDropDownField('page:OpenPositionTemplate:j_id16:j_id66',1)
-Palantir.addDropDownField('page:OpenPositionTemplate:j_id16:j_id71',2)
-Palantir.addDropDownFieldHelper('option',270)
-Palantir.setFinalSubmit('button button-large')
-
 Affirm = Form("https://jobs.lever.co/affirm/41093734-0492-4f7e-b5ab-7fe53f2143e7/apply")
 Affirm.addFillField('name',1)
 Affirm.addFillField('email',2)
@@ -104,4 +97,10 @@ Box.addAttachField('resume',6)
 Box.addFillField('phone',3)
 Box.setFinalSubmit('template-btn-submit')
 
-form_dict = {'Quora':Quora, 'Box':Box, 'Palantir':Palantir, 'Counsyl':Counsyl, 'Affirm':Affirm}
+Stripe = Form("https://stripe.com/jobs/positions/engineer/#engineering")
+Stripe.addEmail({"email": "jobs+engineer@stripe.com","name":"Stripe"})
+
+Arista = Form("http://www.arista.com/en/careers/engineering")
+Arista.addEmail({"email": " jobs@arista.com","name":"Arista"})
+
+form_dict = {'Quora':Quora, 'Box':Box, 'Counsyl':Counsyl, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista}
