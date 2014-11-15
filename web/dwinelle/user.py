@@ -1,7 +1,9 @@
 import jsonpickle
 import urllib
 import uuid
+import pyPdf
 import os
+import string
 
 class UserPlain():
 
@@ -20,6 +22,7 @@ class UserPlain():
 			self.address = user.profile.address
 			self.city = user.profile.city
 			self.zipcode = user.profile.zipcode
+			self.major = "cs"
 
 	def getResume(self):
 		url = self.resume_url
@@ -27,6 +30,16 @@ class UserPlain():
 		filecode = "media/" + str(uuid.uuid4()) + ".pdf"
 		testfile.retrieve(url, filecode)
 		self.resume = filecode
+
+	def resumeToText(self):
+		pdf = pyPdf.PdfFileReader(open(self.resume, "rb"))
+		content = ""
+		for page in pdf.pages:
+			content += page.extractText()
+			content += " "
+		content = content.replace('\n', ' ').replace('"', " ").replace("'", ' ')
+		content = filter(lambda x: x in string.printable, content)
+		return content
 
 	def deleteResume(self):
 		os.remove(self.resume)
@@ -54,6 +67,10 @@ class UserPlain():
 			return self.city
 		elif num == 9:
 			return self.zipcode
+		elif num == 10:
+			return self.major
+		elif num == 11:
+			return self.resumeToText()
 
 def UserToJson(user):
 	return jsonpickle.encode(user)

@@ -12,6 +12,9 @@ class Form:
 		self.Fill_Fields = {}
 		self.Drop_Down_Fields = {}
 		self.Drop_Down_Fields_Helper = {}
+		self.CheckBoxes = []
+		self.extraJavaScript = []
+		self.extraJSHelper = {}
 		self.finalSubmit = None
 		self.email = {}
 	def addEmail(self,em):
@@ -26,6 +29,12 @@ class Form:
 		self.Drop_Down_Fields[html_ele] = index
 	def addDropDownFieldHelper(self,html_ele,index):
 		self.Drop_Down_Fields_Helper[html_ele] = index
+	def addJSHelper(self,html_ele,index): 
+		self.extraJSHelper[html_ele] = index
+	def addCheckBox(self, html_ele):
+		self.CheckBoxes.append(html_ele)
+	def addJavaScript(self,java):
+		self.extraJavaScript.append(java)
 	def setFinalSubmit(self,val):
 		self.finalSubmit = val
 
@@ -54,12 +63,24 @@ def form_fill(user, form):
 	def dropDownHelper():
 		for ele,index in form.Drop_Down_Fields_Helper.iteritems():
 			browser.execute_script('document.getElementsByTagName("'+ele+'")['+str(index)+'].selected=true')
+	def checkBoxes():          #CHANGEDDDDDDDDDD
+		for ele in form.CheckBoxes:
+			browser.execute_script('document.getElementById("' + ele + '").checked=true')
+	def doJS():
+		for ele in form.extraJavaScript:
+			browser.execute_script(ele)
+	def doJSHelp():
+		for ele, index in form.extraJSHelper.iteritems():
+			browser.execute_script('document.getElementById("' + ele +'").value = "'+ user.getField(index) +'";')
 	doClicks()
 	fillField()
 	attachField()
 	dropDownField()
 	dropDownHelper()
-	browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[0].click()')
+	checkBoxes()
+	doJS()
+	doJSHelp()
+	browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[document.getElementsByClassName("' + form.finalSubmit + '").length-1].click()')
 	time.sleep(10)
 	browser.quit()
 	display.stop()
@@ -103,4 +124,38 @@ Stripe.addEmail({"email": "jobs+engineer@stripe.com","name":"Stripe"})
 Arista = Form("http://www.arista.com/en/careers/engineering")
 Arista.addEmail({"email": " jobs@arista.com","name":"Arista"})
 
-form_dict = {'Quora':Quora, 'Box':Box, 'Counsyl':Counsyl, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista}
+EA = Form("http://ea.avature.net/university")
+EA.addAttachField("file_69",6)
+EA.addFillField("61",1.1)
+EA.addFillField("62",1.2)
+EA.addFillField("63",2)
+EA.addFillField("64",3)
+EA.addFillField("78",4)
+EA.addFillField("79",10)
+EA.addDropDownField("67",4)
+EA.addDropDownField("145",1)
+EA.addCheckBox("80_1")
+EA.addCheckBox("128_0")
+EA.addCheckBox("74")
+EA.setFinalSubmit("saveButton")
+EA.addJavaScript('document.getElementById("68").value="2016-05-20"')
+
+Square = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?c=q8Z9VfwV&j=o2XdZfwV&page=Apply")
+Square.addJSHelper("jvresume",11)
+Square.addFillField("jvfirstname",1.1)
+Square.addFillField("jvlastname",1.2)
+Square.addFillField("jvemail",2)
+Square.addFillField("jvphone",3)
+Square.addFillField("jvfld-xaMmVfwX",4)
+Square.addDropDownField("jvfld-xrNmVfwf",4)
+Square.setFinalSubmit("btn")
+
+MongoDB = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?k=Apply&c=qX79VfwS&j=oG2vZfwW")
+MongoDB.addFillField("jvfirstname",1.1)
+MongoDB.addFillField("jvlastname",1.2)
+MongoDB.addFillField("jvemail",2)
+MongoDB.addFillField("jvphone",3)
+MongoDB.addFillField("jvresume",11)
+MongoDB.setFinalSubmit("jvbutton")
+
+form_dict = {'Quora':Quora, 'Box':Box, 'Counsyl':Counsyl, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB}
