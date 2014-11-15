@@ -119,6 +119,10 @@ def profile(request):
 		if user.profile:
 			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'address': user.profile.address, 'city': user.profile.city, 'zipcode': user.profile.zipcode,'resume': user.profile.resume})
 		context = {'form' : form}
+		if user.profile and user.profile.resume:
+			context['resume_url'] = user.profile.resume.url
+		else:
+			context['resume_url'] = None
 		return render(request, 'profile.html', context)
 	elif request.method == 'POST':
 		form = profile_form(request.POST)
