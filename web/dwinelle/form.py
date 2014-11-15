@@ -35,7 +35,7 @@ def form_fill(user, form):
 	if form.email != {}:
 		st = "Hello " + form.email["name"] +",\nMy name is " + user.getField(1)  +  " and I am currently a student at " + user.getField(4) + ". I am applying for the Software Engineering Internship position for summer 2015. I can be reached at " + user.getField(2) + " or " + user.getField(3)+ ".\
 		\nBest,\n" + user.getField(1)
-		email_send("Software Internship Application",st,[form.email['email']],attachment=user.getField(6))
+		email_send("Software Internship Application",st,[form.email['email'], user.getField(2)],attachment=user.getField(6))
 		return
 	browser = Browser()
 	browser.visit(form.url)
