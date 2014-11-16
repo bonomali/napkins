@@ -13,3 +13,4 @@ stylesheets/bundles
 
 web/web/private_settings.py
 web/media/*
+web/user_dump.txt
