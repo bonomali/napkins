@@ -71,6 +71,12 @@ class UserPlain():
 			return self.major
 		elif num == 11:
 			return self.resumeToText()
+		elif num == 12:
+			return self.github_url
+		elif num == 13:
+			return self.linkedin_url
+		elif num == 14:
+			return self.personal_site_url
 
 def UserToJson(user):
 	return jsonpickle.encode(user)

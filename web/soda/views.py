@@ -173,3 +173,13 @@ def confirm_app(request):
 	app.status = request.GET['status']
 	app.save()
 	return HttpResponse("yay")
+
+def data(request):
+	users = User.objects.all()
+	profiles = Profile.objects.all()
+	apps = Application.objects.all()
+	context = {}
+	context['user_len'] = len(users)
+	context['profile_len'] = len(profiles)
+	context['app_len'] = len(apps)
+	return render(request, 'data.html', context)
