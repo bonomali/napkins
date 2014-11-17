@@ -42,8 +42,8 @@ class Form:
 		self.submitJS.append(java)
 
 def form_fill(user, form):
-	# display = Display(visible=0, size=(800, 600))
-	# display.start()
+	display = Display(visible=0, size=(800, 600))
+	display.start()
 	if form.email != {}:
 		st = "Hello " + form.email["name"] +",\nMy name is " + user.getField(1)  +  " and I am currently a student at " + user.getField(4) + ". I am applying for the Software Engineering Internship position for summer 2015. I can be reached at " + user.getField(2) + " or " + user.getField(3)+ ".\
 		\nBest,\n" + user.getField(1)
@@ -66,7 +66,7 @@ def form_fill(user, form):
 	def dropDownHelper():
 		for ele,index in form.Drop_Down_Fields_Helper.iteritems():
 			browser.execute_script('document.getElementsByTagName("'+ele+'")['+str(index)+'].selected=true')
-	def checkBoxes():          #CHANGEDDDDDDDDDD
+	def checkBoxes():
 		for ele in form.CheckBoxes:
 			browser.execute_script('document.getElementById("' + ele + '").checked=true')
 	def doJS():
@@ -91,7 +91,7 @@ def form_fill(user, form):
 		browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[document.getElementsByClassName("' + form.finalSubmit + '").length-1].click()')
 	time.sleep(10)
 	browser.quit()
-	# display.stop()
+	display.stop()
 
 Counsyl = Form("https://www.counsyl.com/careers/software-engineering-intern-2015/")
 Counsyl.addClicks("https://jobs.lever.co/counsyl/")
