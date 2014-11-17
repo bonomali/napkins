@@ -17,6 +17,7 @@ class Form:
 		self.extraJSHelper = {}
 		self.finalSubmit = None
 		self.email = {}
+		self.submitJS = []
 	def addEmail(self,em):
 		self.email = em
 	def addClicks(self, button_name):
@@ -37,10 +38,12 @@ class Form:
 		self.extraJavaScript.append(java)
 	def setFinalSubmit(self,val):
 		self.finalSubmit = val
+	def setSubmitJS(self,java):
+		self.submitJS.append(java)
 
 def form_fill(user, form):
-	display = Display(visible=0, size=(800, 600))
-	display.start()
+	# display = Display(visible=0, size=(800, 600))
+	# display.start()
 	if form.email != {}:
 		st = "Hello " + form.email["name"] +",\nMy name is " + user.getField(1)  +  " and I am currently a student at " + user.getField(4) + ". I am applying for the Software Engineering Internship position for summer 2015. I can be reached at " + user.getField(2) + " or " + user.getField(3)+ ".\
 		\nBest,\n" + user.getField(1)
@@ -72,6 +75,9 @@ def form_fill(user, form):
 	def doJSHelp():
 		for ele, index in form.extraJSHelper.iteritems():
 			browser.execute_script('document.getElementById("' + ele +'").value = "'+ user.getField(index) +'";')
+	def submitJS():
+		for ele in form.submitJS:
+			browser.execute_script(ele)
 	doClicks()
 	fillField()
 	attachField()
@@ -80,10 +86,12 @@ def form_fill(user, form):
 	checkBoxes()
 	doJS()
 	doJSHelp()
-	browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[document.getElementsByClassName("' + form.finalSubmit + '").length-1].click()')
+	submitJS()
+	if not form.submitJS:
+		browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[document.getElementsByClassName("' + form.finalSubmit + '").length-1].click()')
 	time.sleep(10)
 	browser.quit()
-	display.stop()
+	# display.stop()
 
 Counsyl = Form("https://www.counsyl.com/careers/software-engineering-intern-2015/")
 Counsyl.addClicks("https://jobs.lever.co/counsyl/")
@@ -191,4 +199,68 @@ SpaceX.addDropDownField("jvfld-xoWgVfwf",1)
 SpaceX.addJSHelper("jvresume",11)
 SpaceX.setFinalSubmit("jvbutton")
 
-form_dict = {'Quora':Quora, 'Box':Box, 'Counsyl':Counsyl, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB, 'Nest':Nest, 'SpaceX':SpaceX}
+Jawbone = Form("https://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qPb9VfwO&amp;cs=919aVfwZ&amp;j=orRJZfwK&amp;jvprefix=https%3a%2f%2fjawbone.com&amp;jvresize=%2fcareers%2fjobvite_frame_resize&amp;page=Apply&page=Apply&j=orRJZfwK")
+Jawbone.addFillField("jvfirstname",1.1)
+Jawbone.addFillField("jvlastname",1.2)
+Jawbone.addFillField("jvemail",2)
+Jawbone.addFillField("jvphone",3)
+Jawbone.addJSHelper("jvresume",11)
+Jawbone.setFinalSubmit("jvbutton")
+
+RocketFuel = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qK29VfwA&jvprefix=http%3a%2f%2frocketfuel.com&cs=9Sq9Vfw6&jvresize=http%3a%2f%2frocketfuel.com%2fframeresize.htm&page=Apply&j=o7hRZfwY")
+RocketFuel.addFillField("jvfirstname",1.1)
+RocketFuel.addFillField("jvlastname",1.2)
+RocketFuel.addFillField("jvemail",2)
+RocketFuel.addJavaScript('document.getElementById("Text1").value = "N/A";');
+RocketFuel.addFillField("jvfld-x-sV9Vfwb", 8)
+RocketFuel.addFillField("jvphone",3)
+RocketFuel.addDropDownField("jvfld-xFjqVfw3", 2)
+RocketFuel.addJSHelper("jvresume",11)
+RocketFuel.setFinalSubmit("btnSendApp")
+RocketFuel.setSubmitJS("$('#jvform').submit();");
+
+Etsy = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qmZ9Vfw9&amp;j=oMwPZfwQ&amp;page=Apply&page=Apply&j=oMwPZfwQ")
+Etsy.addFillField("jvfirstname", 1.1)
+Etsy.addFillField("jvlastname",1.2)
+Etsy.addFillField("jvemail",2)
+Etsy.addFillField("jvphone",3)
+Etsy.addDropDownField("jvfld-xCBiVfwa", 2)
+Etsy.addDropDownField("jvfld-xOKiVfwv", 1)
+Etsy.addJSHelper("jvresume",11)
+Etsy.setFinalSubmit("jvbutton")
+
+Yelp = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?c=q6X9VfwR&jvprefix=http%3a%2f%2fwww.yelp.com&cs=924aVfwV&jvresize=http%3a%2f%2fwww.yelp.com%2fhtml%2fjobvite.html&nl=0&page=Apply&j=oFOmWfwv")
+Yelp.addFillField("jvfirstname", 1.1)
+Yelp.addFillField("jvlastname",1.2)
+Yelp.addFillField("jvfld-x-sV9Vfwb", 8)
+Yelp.addDropDownField("jvfld-x-XV9VfwG", 52)
+Yelp.addDropDownField("jvfld-x-uV9Vfwd", 226)
+Yelp.addFillField("jvemail",2)
+Yelp.addFillField("jvphone",3)
+Yelp.addDropDownField("jvworkstatus", 1)
+Yelp.addFillField("jvfld-xGGfVfwg", 14)
+Yelp.addJSHelper("jvresume",11)
+Yelp.setSubmitJS("$('#jvform').submit();");
+Yelp.setSubmitJS("document.getElementById('f0')[5].selected=true")
+Yelp.setSubmitJS("document.forms[0].submit() ;")
+
+Zendesk = Form("https://hire.jobvite.com/CompanyJobs/Careers.aspx?c=q769Vfw1&jvprefix=http%3a%2f%2fwww.zendesk.com&jvresize=https%3a%2f%2fwww.zendesk.com%2fframe-resize&page=Apply&j=ogCBZfwc")
+Zendesk.addFillField("jvfirstname", 1.1)
+Zendesk.addFillField("jvlastname",1.2)
+Zendesk.addFillField("jvemail",2)
+Zendesk.addFillField("jvphone",3)
+Zendesk.addJSHelper("jvresume",11)
+Zendesk.setFinalSubmit("jvbutton")
+
+AppNexus = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?k=JobListing&c=qbZ9VfwY&jvresize=http%3A%2F%2Fcareers.appnexus.com%2FFrameResize.html&j=oB1QZfwb%2CApply&v=1")
+AppNexus.addFillField("jvfirstname",1.1)
+AppNexus.addJSHelper("jvresume",11)
+AppNexus.addJSHelper('jvlastname',1.2)
+AppNexus.addJSHelper("jvemail",2)
+AppNexus.addJSHelper("jvphone",3)
+AppNexus.addJSHelper("jvresume",11)
+AppNexus.addFillField("jvfld-x-sV9Vfwb",4)
+AppNexus.addDropDownField("jvfld-x-XV9VfwG",5)
+AppNexus.setSubmitJS("$('#jvform').submit();");
+
+form_dict = {'Quora':Quora, 'Box':Box, 'Counsyl':Counsyl, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB, 'Nest':Nest, 'SpaceX':SpaceX, 'Jawbone':Jawbone, 'Etsy':Etsy, 'Yelp':Yelp, 'Zendesk':Zendesk, 'AppNexus':AppNexus, 'RocketFuel':RocketFuel}
