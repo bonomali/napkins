@@ -1,6 +1,8 @@
+{% load analytical %}
 <!DOCTYPE html>
 <html lang="en" class="index">
     <head>
+        {% analytical_head_top %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +16,10 @@
                 color: #FFF;
             }
         </style>
+        {% analytical_head_bottom %}
     </head>
     <body class="index">
+        {% analytical_body_top %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
         </script>
         <script src="/static/js/bootstrap.min.js"></script>
@@ -53,5 +57,6 @@
                 </form>
             </div>
         </main>
+        {% analytical_body_bottom %}
     </body>
 </html>

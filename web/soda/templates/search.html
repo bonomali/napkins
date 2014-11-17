@@ -1,6 +1,8 @@
+{% load analytical %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        {% analytical_head_top %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,8 +10,10 @@
         <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
         <link href="/static/css/bootstrap.min.css" rel="stylesheet">
         <link href="/static/css/qurse.css" rel="stylesheet">
+        {% analytical_head_bottom %}
     </head>
     <body>
+        {% analytical_body_top %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
         </script>
         <script src="/static/js/bootstrap.min.js"></script>
@@ -65,5 +69,6 @@
                 </div>
             </div>
         </main>
+        {% analytical_body_bottom %}
     </body>
 </html>
