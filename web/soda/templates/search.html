@@ -53,8 +53,12 @@
                             </ul>
                         </aside>
                         <div id="main">
-                            <p style="color:#666; margin-bottom:15px;"># automated applications left today: {{ num_apps_left_today }}</p>
-                            <div style="width:700px; display:block;">
+                            <div style="margin-bottom:35px; width:600px;">
+                                <p style="color:#666; margin-bottom:15px; float:left;"># automated applications left today: {{ num_apps_left_today }}
+                                </p>
+                                <a href="/feedback" style="cursor:pointer; float:right;">Leave a suggestion please!</a>
+                            </div>
+                            <div style="width:700px;">
 						    {% for company in companies %}
                                 <div style="float:left; height:130px; width:120px;">
 							        <a href="/company/{{company.id}}" style="margin-right:10px;">

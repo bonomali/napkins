@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^history/$', views.history, name="history"),
     url(r'^confirm_app/$', views.confirm_app, name="confirm_app"),
 
+    url(r'^feedback/$', views.feedback, name="feedback"),
     url(r'^data/$', views.data, name="data"),
 )
