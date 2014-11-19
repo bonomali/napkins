@@ -11,7 +11,7 @@ import random
 import requests
 from multiprocessing.dummy import Pool
 from soda.models import *
-from soda.form import signup_form, signin_form, profile_form, emaillist_form
+from soda.form import signup_form, signin_form, profile_form, coverletter_form
 from dwinelle.user import *
 from dwinelle.models import *
 from soda.email import *
@@ -33,8 +33,6 @@ def search(request):
 	context = {}
 	context['num_apps_left_today'] = user.num_apps_left_today
 	context['companies'] = Company.objects.all()
-	form = emaillist_form()
-	context['form'] = form
 	context['user'] = request.user
 	return render(request, 'search.html', context)
 
@@ -48,7 +46,7 @@ def company(request, company_id):
 def apply(request, company_id):
 	user = User.objects.get(email=request.user)
 	company = Company.objects.filter(id=company_id)[0]
-	if not user.profile:
+	if not user.profile or not user.profile.address:
 		return HttpResponseRedirect('/profile/')
 	if user.num_apps_left_today == 0:
 		context = {}
@@ -121,15 +119,16 @@ def profile(request):
 	if request.method == "GET":
 		form = profile_form()
 		if user.profile:
-			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'address': user.profile.address, 'city': user.profile.city, 'zipcode': user.profile.zipcode,'resume': user.profile.resume})
-		context = {'form' : form}
+			form = profile_form({'github_url': user.profile.github_url, 'linkedin_url': user.profile.linkedin_url, 'personal_site_url':user.profile.personal_site_url, 'phone': user.profile.phone, 'college': user.profile.college, 'gpa': user.profile.gpa, 'address': user.profile.address, 'city': user.profile.city, 'zipcode': user.profile.zipcode,'state': user.profile.state,'resume': user.profile.resume})
+		context = {'form' : form, 'has_coverletter':False}
+		if user.profile and user.profile.coverletter:
+			context['has_coverletter'] = True
 		if user.profile and user.profile.resume:
 			context['resume_url'] = user.profile.resume.url
 		else:
 			context['resume_url'] = None
 		return render(request, 'profile.html', context)
 	elif request.method == 'POST':
-		form = profile_form(request.POST)
 		github_url = request.POST['github_url']
 		linkedin_url = request.POST['linkedin_url']
 		personal_site_url = request.POST['personal_site_url']
@@ -138,6 +137,7 @@ def profile(request):
 		gpa = request.POST['gpa']
 		address = request.POST['address']
 		city = request.POST['city']
+		state = request.POST['state']
 		zipcode = request.POST['zipcode']
 		has_resume = 'resume' in request.FILES.keys()
 		if has_resume:
@@ -155,6 +155,7 @@ def profile(request):
 		profile.gpa = gpa
 		profile.address = address
 		profile.city = city
+		profile.state = state
 		profile.zipcode = zipcode
 		if has_resume:
 			profile.resume = resume
@@ -162,6 +163,30 @@ def profile(request):
 		user.profile = profile
 		user.save()
 		return HttpResponseRedirect('/search/')
+
+
+@login_required(login_url='/signin/')
+def coverletter(request):
+	user = User.objects.get(email=request.user)
+	if request.method == "GET":
+		if not user.profile:
+			p = Profile()
+			p.save()
+			user.profile = p
+			user.save()
+		profile = user.profile
+		form = coverletter_form()
+		if user.profile.coverletter:
+			form = coverletter_form({'coverletter': user.profile.coverletter})
+		context = {'form' : form}
+		return render(request, 'coverletter.html', context)
+	elif request.method == "POST":
+		coverletter = request.POST['coverletter']
+		p = user.profile
+		p.coverletter = coverletter
+		p.save()
+		return HttpResponseRedirect('/profile/')
+
 
 @login_required(login_url='/signin/')
 def history(request):

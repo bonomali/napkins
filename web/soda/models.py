@@ -25,18 +25,20 @@ def upload_resume_to(instance, filename):
     )
 
 class Profile(models.Model):
-    github_url = models.CharField(max_length=50)
-    linkedin_url = models.CharField(max_length=50)
-    personal_site_url = models.CharField(max_length=50)
+    github_url = models.CharField(max_length=50, default="")
+    linkedin_url = models.CharField(max_length=50, default="")
+    personal_site_url = models.CharField(max_length=50, default="")
 
-    phone = models.CharField(max_length=50)
-    college = models.CharField(max_length=50)
-    gpa = models.CharField(max_length=10)
-    address = models.CharField(max_length=30)
-    city = models.CharField(max_length=30)
-    zipcode = models.CharField(max_length=30)
+    phone = models.CharField(max_length=50, default="")
+    college = models.CharField(max_length=50, default="")
+    gpa = models.CharField(max_length=10, default="")
+    address = models.CharField(max_length=30, default="")
+    city = models.CharField(max_length=30, default="")
+    state = models.CharField(max_length=30, default="")
+    zipcode = models.CharField(max_length=30, default="")
 
-    resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True)
+    coverletter = models.CharField(max_length=1500, default="")
+    resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True, default=None)
 
 class Application(models.Model):
     user = models.ForeignKey('User', null=True, default=None)

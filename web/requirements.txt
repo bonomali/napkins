@@ -1,4 +1,4 @@
-Django==1.6.8
+Django==1.7
 PyVirtualDisplay==0.1.5
 argparse==1.2.1
 boto==2.20.1

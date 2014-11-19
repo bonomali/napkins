@@ -19,8 +19,9 @@ class profile_form(forms.Form):
 	gpa = forms.CharField(required=True, label='gpa', max_length=10)
 	address = forms.CharField(required=True, label='address', max_length=30)
 	city = forms.CharField(required=True, label='city', max_length=30)
+	state = forms.CharField(required=True, label='state', max_length=30)
 	zipcode = forms.CharField(required=True, label='zipcode', max_length=30)
 	resume = forms.FileField(required=True, label='resume')
 
-class emaillist_form(forms.Form):
-	email = forms.CharField(required=True, label='email')
+class coverletter_form(forms.Form):
+	coverletter = forms.CharField(widget=forms.Textarea, label='coverletter', max_length=1500)

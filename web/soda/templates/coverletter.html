@@ -37,51 +37,28 @@
             </nav>
         </header>
         <main class="main-content" id="content" role="main">
-            <div id="container">
+            <div id="container" >
                 <div id="content">
                     <div class="contents">
-                        <aside id="sidebar">
-                            <ul>
-                                <li>
-                                    <a href="/search">Search</a>
-                                </li>
-                                <li>
-                                    <a href="/history">History</a>
-                                </li>
-                                <li class="current">
-                                    <a href="/profile">Profile</a>
-                                </li>
-                            </ul>
-                        </aside>
-                        <div id="main">
-                            <form action="/profile/" method="post" enctype="multipart/form-data">
+                        <div id="main" style="padding-left:25px;" align="center">
+                            <form action="/coverletter/" method="post">
                                 {% csrf_token %}
                                 {% for field in form %}
-                                    {% if field|is_resume %}
-                                        <p style="color:#000">Resume: 
-                                        {% if resume_url %}
-                                        (<a href="{{ resume_url }}" target="_blank">current</a>)
-                                        {% endif %}
-                                        </p>
-                                        <input class="form-control" style="border-bottom: 1px dotted #777" type="file" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" value="{{ field.value }}">
-                                    {% elif field.value %}
-                                        <input class="form-control" style="border-bottom: 1px dotted #777" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" value="{{ field.value }}">
+                                    {% if field.value %}
+                                        <textarea class="form-control" style="border-bottom: 1px dotted #777; height:300px; width:500px;" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">{{ field.value }}</textarea>
                                     {% else %}
-                                        <input class="form-control" style="border-bottom: 1px dotted #777" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                                        <textarea class="form-control" style="border-bottom: 1px dotted #777; height:300px; width:500px;" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}"> Enter coverletter here!</textarea>
                                     {% endif %}
                                 {% endfor %}
-                                <p style="color:#000;"><a href="/coverletter" style="cursor:pointer;">
-                                {% if has_coverletter %}
-                                    Update
-                                {% else %}
-                                    Add
-                                {% endif %}
-                                cover letter</a> (optional)</p>
-                                <div style="width: 100%; margin-top: 20px; text-align: right">
+                                <p style="font-size:13px;color:#777;">Note: Reference a specific company as '[company]'<br>for example: Hello [company], my name is... --> Hello Google, name is... </p>
+                                <div style="width: 100%; margin-top: 20px;">
                                     <input type="submit" style="width: 100px !important" class="button-table" value="Update" />
                                 </div>
                             </form>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

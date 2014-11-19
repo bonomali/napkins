@@ -21,8 +21,10 @@ class UserPlain():
 			self.resume_url = user.profile.resume.url
 			self.address = user.profile.address
 			self.city = user.profile.city
+			self.state = user.profile.state
 			self.zipcode = user.profile.zipcode
 			self.major = "cs"
+			self.coverletter = user.profile.coverletter
 
 	def getResume(self):
 		url = self.resume_url
@@ -44,7 +46,7 @@ class UserPlain():
 	def deleteResume(self):
 		os.remove(self.resume)
 
-	def getField(self, num):
+	def getField(self, num, company=None):
 		if num == 1.1:
 			return self.first_name
 		elif num == 1.2:
@@ -67,6 +69,8 @@ class UserPlain():
 			return self.city
 		elif num == 9:
 			return self.zipcode
+		elif num == 9.1:
+			return self.state
 		elif num == 10:
 			return self.major
 		elif num == 11:
@@ -77,6 +81,8 @@ class UserPlain():
 			return self.linkedin_url
 		elif num == 14:
 			return self.personal_site_url
+		elif num == 15:
+			return self.coverletter.replace("[company]", company.name)
 
 def UserToJson(user):
 	return jsonpickle.encode(user)
