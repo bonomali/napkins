@@ -34,17 +34,26 @@ class UserPlain():
 		self.resume = filecode
 
 	def resumeToText(self):
+		has_resume = hasattr(self, 'resume')
+		if not has_resume:
+			self.getResume()
+
 		pdf = pyPdf.PdfFileReader(open(self.resume, "rb"))
 		content = ""
-		for page in pdf.pages:
-			content += page.extractText()
-			content += " "
-		content = content.replace('\n', ' ').replace('"', " ").replace("'", ' ')
+		for i in range(0, pdf.getNumPages()):
+			this_page = pdf.getPage(i).extractText() + "\n"
+			this_page = " ".join(this_page.replace(u"\xa0", " ").strip().split())
+			content += this_page.encode("ascii", "xmlcharrefreplace")
+		content = content.replace('"', " ").replace("'", ' ')
 		content = filter(lambda x: x in string.printable, content)
+		
+		if not has_resume:
+			self.deleteResume()
 		return content
 
 	def deleteResume(self):
 		os.remove(self.resume)
+		del(self.resume)
 
 	def getField(self, num, company=None):
 		if num == 1.1:

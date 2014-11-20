@@ -13,6 +13,8 @@ from multiprocessing.dummy import Pool
 from soda.models import *
 from soda.form import signup_form, signin_form, profile_form, coverletter_form
 from dwinelle.user import *
+from dwinelle.form import form_dict
+from dwinelle.preview import *
 from dwinelle.models import *
 from soda.email import *
 
@@ -41,6 +43,16 @@ def company(request, company_id):
 	context = {}
 	context['company'] = Company.objects.filter(id=company_id)[0]
 	return render(request, 'company.html', context)
+
+@login_required(login_url='/signin/')
+def company_preview(request, company_id):
+	user = User.objects.get(email=request.user)
+	company = Company.objects.filter(id=company_id)[0]
+	user = UserPlain(user)
+	form = form_dict[company.name]
+	fields = preview(user, form).iteritems()
+	context = {'fields':fields, 'company':company}
+	return render(request, 'preview.html', context)
 
 @login_required(login_url='/signin/')
 def apply(request, company_id):

@@ -58,7 +58,7 @@
                                 {% csrf_token %}
                                 {% for field in form %}
                                     {% if field|is_resume %}
-                                        <p style="color:#000">Resume: 
+                                        <p style="color:#000">Resume(.pdf): 
                                         {% if resume_url %}
                                         (<a href="{{ resume_url }}" target="_blank">current</a>)
                                         {% endif %}
