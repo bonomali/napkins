@@ -37,7 +37,6 @@ company_list['box'] = {'name':'Box', 'description':"Box Inc. (formerly Box.net) 
 # company_list['square'] = {'name':"Square", 'description':"Square, Inc. is a financial services, merchant services aggregator and mobile payments company based in San Francisco, California. The company markets several software and hardware products and services, including Square Register and Square Order. The company was founded in 2009 by Jack Dorsey and Jim McKelvey and launched its first app and service in 2010.", 'links':"http://hire.jobvite.com/CompanyJobs/Careers.aspx?c=q8Z9VfwV&page=Apply&j=o2XdZfwV"}
 
 
-# https://jawbone.com/careers/orRJZfwK/apply
 
-
+# $("#application_form").append('<input type="hidden" id="resume_url" name="job_application[resume_url]" value="https://prod-heroku.s3.amazonaws.com/applications%2Fresumes%2F1416551499241-ttca839wd4wpnwmi-e46cc73ef60bde2c747783f9ed85d56b%2Fkevin_fox_resume.pdf"><input type="hidden" id="resume_url_filename" name="job_application[resume_url_filename]" value="kevin_fox_resume.pdf">')
 

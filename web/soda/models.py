@@ -1,4 +1,5 @@
 from django.db import models
+from storages.backends import s3boto
 
 class Company(models.Model):
     name = models.CharField(max_length=30)
@@ -24,6 +25,10 @@ def upload_resume_to(instance, filename):
         filename_ext.lower(),
     )
 
+public_storage = s3boto.S3BotoStorage(
+  querystring_expire=600000000,
+)
+
 class Profile(models.Model):
     github_url = models.CharField(max_length=50, default="")
     linkedin_url = models.CharField(max_length=50, default="")
@@ -38,7 +43,7 @@ class Profile(models.Model):
     zipcode = models.CharField(max_length=30, default="")
 
     coverletter = models.CharField(max_length=1500, default="")
-    resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True, default=None)
+    resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True, default=None, storage=public_storage)
 
 class Application(models.Model):
     user = models.ForeignKey('User', null=True, default=None)

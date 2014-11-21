@@ -19,6 +19,9 @@ class Form:
 		self.finalSubmit = None
 		self.email = {}
 		self.submitJS = []
+		self.greenHouseResume = False
+	def hasGreenHouseResume(self):
+		self.greenHouseResume = True
 	def addEmail(self,em):
 		self.email = em
 	def addClicks(self, button_name):
@@ -47,14 +50,17 @@ def emailFill(user,form):
 		\nBest,\n" + user.getField(1)
 
 def form_fill(user, form):
-	display = Display(visible=0, size=(800, 600))
-	display.start()
+	# display = Display(visible=0, size=(800, 600))
+	# display.start()
 	if form.email != {}:
 		st = emailFill(user, form)
 		email_send("Software Internship Application",st,[form.email['email'], user.getField(2)],attachment=user.getField(6))
 		return
 	browser = Browser()
 	browser.visit(form.url)
+	if form.greenHouseResume:
+		string = """$("#application_form").append('<input type="hidden" id="resume_url" name="job_application[resume_url]" value=""" + '"' + user.getField(6.1) + '"' + """><input type="hidden" id="resume_url_filename" name="job_application[resume_url_filename]" value="resume.pdf">')"""
+		browser.execute_script(string)
 	def doClicks(): #partial_htmls being dealt with
 		for ele in form.html_button_clicks:
 			browser.find_link_by_partial_href(ele)[0].click()
@@ -95,7 +101,7 @@ def form_fill(user, form):
 		browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[document.getElementsByClassName("' + form.finalSubmit + '").length-1].click()')
 	time.sleep(10)
 	browser.quit()
-	display.stop()
+	# display.stop()
 
 Affirm = Form("https://jobs.lever.co/affirm/41093734-0492-4f7e-b5ab-7fe53f2143e7/apply", "Affirm")
 Affirm.addFillField('name',1, "Full name")
@@ -299,4 +305,104 @@ InteractiveIntelligence.addFillField("jvfld-x-rV9Vfwa", 7, "Address")
 InteractiveIntelligence.addJSHelper("jvresume", 11)
 InteractiveIntelligence.setSubmitJS("$('#jvform').submit();")
 
-form_dict = {'Quora':Quora, 'Box':Box, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB, 'Nest':Nest, 'SpaceX':SpaceX, 'Jawbone':Jawbone, 'Etsy':Etsy, 'Yelp':Yelp, 'Zendesk':Zendesk, 'AppNexus':AppNexus, 'RocketFuel':RocketFuel, 'Lifesize':Lifesize, 'Medialets':Medialets, "AppFolio":AppFolio, 'Infinera':Infinera, "InteractiveIntelligence":InteractiveIntelligence}
+CodeAcademy = Form("https://jobs.lever.co/codecademy/865fcd20-1fcf-47ff-bbfc-67dccdb9322a/apply", "CodeAcademy")
+CodeAcademy.addFillField('name',1,"Full Name")
+CodeAcademy.addFillField('email',2,"Email")
+CodeAcademy.addAttachField('resume',6)
+CodeAcademy.addFillField('phone',3,"Phone")
+CodeAcademy.addFillField("urls[Github]",12, "Github URL")
+CodeAcademy.addFillField("urls[LinkedIn]",13, "LinkedIn URL")
+CodeAcademy.addFillField("urls[Other]",14, "Other website")
+CodeAcademy.setFinalSubmit('template-btn-submit')
+ 
+ClearSlide = Form("https://jobs.lever.co/clearslide/ba666e4f-221c-4b8e-bb7d-f435d0d1c105/apply", "ClearSlide")
+ClearSlide.addFillField('name',1,"Full Name")
+ClearSlide.addFillField('email',2,"Email")
+ClearSlide.addAttachField('resume', 6)
+ClearSlide.addFillField('phone',3,"Phone")
+ClearSlide.addFillField("urls[Github]",12, "Github URL")
+ClearSlide.addFillField("urls[LinkedIn]",13, "LinkedIn URL")
+ClearSlide.addFillField("urls[Other]",14, "Other website")
+ClearSlide.setFinalSubmit('template-btn-submit')
+
+Blackbaud = Form("https://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qWX9VfwH&jvprefix=https%3a%2f%2fwww.blackbaud.com&cs=95XaVfwR&jvresize=https%3a%2f%2fwww.blackbaud.com%2ffiles%2fcareers%2fFrameResize.html&nl=0&page=Apply&j=oWGJZfw4", "Blackbaud")
+Blackbaud.addFillField("jvfirstname", 1.1, "First Name")
+Blackbaud.addFillField("jvlastname", 1.2, "Last Name")
+Blackbaud.addFillField("jvemail", 2, "Email")
+Blackbaud.addFillField("jvphone", 3, "Phone")
+Blackbaud.addFillField("jvfld-x-rV9Vfwa", 7, "Address")
+Blackbaud.addFillField("jvfld-x-sV9Vfwb", 8, "City")
+Blackbaud.addFillField("jvfld-x-tV9Vfwc", 9, "Zipcode")
+Blackbaud.addDropDownField("jvfld-x-uV9Vfwd", 226)
+Blackbaud.addDropDownField("jvfld-x-XV9VfwG", 1)
+Blackbaud.addJSHelper("jvresume", 11)
+Blackbaud.setSubmitJS("$('#jvform').submit();")
+Blackbaud.setSubmitJS('document.getElementById("f0").value="moo";')
+Blackbaud.setSubmitJS('document.getElementById("f2_1").checked=true;')
+Blackbaud.setSubmitJS('document.getElementById("f1").value="$1500-$4500";')
+Blackbaud.setSubmitJS('document.forms[0].submit();')
+
+SurveyMonkey = Form("https://boards.greenhouse.io/surveymonkey/jobs/30035?#app", "SurveyMonkey")
+SurveyMonkey.addFillField('job_application[first_name]',1.1, "First name")
+SurveyMonkey.addFillField('job_application[last_name]',1.2, "Last name")
+SurveyMonkey.addFillField('job_application[email]',2, "Email")
+SurveyMonkey.addFillField('job_application[phone]',3, "Phone")
+SurveyMonkey.addFillField('job_application[answers_attributes][0][text_value]',13, "Linkedin")
+SurveyMonkey.addFillField('job_application[answers_attributes][1][text_value]',14, "Personal Website")
+SurveyMonkey.hasGreenHouseResume()
+SurveyMonkey.setFinalSubmit("button")
+
+ThumbTack = Form("https://boards.greenhouse.io/thumbtack/jobs/2570?#app", "ThumbTack")
+ThumbTack.addFillField('job_application[first_name]',1.1, "First name")
+ThumbTack.addFillField('job_application[last_name]',1.2, "Last name")
+ThumbTack.addFillField('job_application[email]',2, "Email")
+ThumbTack.addFillField('job_application[phone]',3, "Phone")
+ThumbTack.addFillField('job_application[answers_attributes][0][text_value]',13, "Linkedin")
+ThumbTack.addFillField('job_application[answers_attributes][1][text_value]',14, "Personal website")
+ThumbTack.hasGreenHouseResume()
+ThumbTack.setFinalSubmit("button")
+
+Twilio = Form("https://boards.greenhouse.io/twilio/jobs/26688#app", "Twilio")
+Twilio.addFillField('job_application[first_name]',1.1, "First name")
+Twilio.addFillField('job_application[last_name]',1.2, "Last name")
+Twilio.addFillField('job_application[email]',2, "Email")
+Twilio.addFillField('job_application[phone]',3, "Phone")
+Twilio.addJavaScript('document.getElementById("job_application_answers_attributes_0_text_value").value = "Napkins.io"')
+Twilio.addFillField('job_application[answers_attributes][2][text_value]',13, "Linkedin")
+Twilio.addFillField('job_application[answers_attributes][3][text_value]',14, "Personal website")
+Twilio.hasGreenHouseResume()
+Twilio.setFinalSubmit("button")
+
+TubeMogul = Form("https://boards.greenhouse.io/tubemogulinc/jobs/33121?#app", "TubeMogul")
+TubeMogul.addFillField('job_application[first_name]',1.1, "First name")
+TubeMogul.addFillField('job_application[last_name]',1.2, "Last name")
+TubeMogul.addFillField('job_application[email]',2, "Email")
+TubeMogul.addFillField('job_application[phone]',3, "Phone")
+TubeMogul.addJavaScript('document.getElementById("job_application_answers_attributes_2_text_value").value = "Napkins.io"')
+TubeMogul.addDropDownField("job_application_answers_attributes_3_boolean_value", 2)
+TubeMogul.hasGreenHouseResume()
+TubeMogul.setFinalSubmit("button")
+
+Pinterest = Form("https://app.greenhouse.io/embed/job_app?token=34498&amp;t=null&amp;b=https://about.pinterest.com/en/careers/cloud-software-engineer-intern_34498", "Pinterest")
+Pinterest.addFillField('job_application[first_name]',1.1, "First name")
+Pinterest.addFillField('job_application[last_name]',1.2, "Last name")
+Pinterest.addFillField('job_application[email]',2, "Email")
+Pinterest.addFillField('job_application[phone]',3, "Phone")
+Pinterest.hasGreenHouseResume()
+Pinterest.addJavaScript('document.getElementById("job_application_answers_attributes_0_text_value").value = "N/A"')
+Pinterest.addFillField("job_application[answers_attributes][1][text_value]",13, "Linkedin")
+Pinterest.addFillField("job_application[answers_attributes][2][text_value]",12, "Github")
+Pinterest.addFillField("job_application[answers_attributes][3][text_value]",14, "Personal")
+Pinterest.setFinalSubmit("button")
+
+Spokeo = Form("https://boards.greenhouse.io/spokeo/jobs/33554#app", "Spokeo")
+Spokeo.addFillField('job_application[first_name]',1.1, "First name")
+Spokeo.addFillField('job_application[last_name]',1.2, "Last name")
+Spokeo.addFillField('job_application[email]',2, "Email")
+Spokeo.addFillField('job_application[phone]',3, "Phone")
+Spokeo.hasGreenHouseResume()
+Spokeo.addFillField("job_application[answers_attributes][0][text_value]",13, "Linkedin")
+Spokeo.addFillField("job_application[answers_attributes][1][text_value]",14, "Personal website")
+Spokeo.setFinalSubmit("button")
+
+form_dict = {'Quora':Quora, 'Box':Box, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB, 'Nest':Nest, 'SpaceX':SpaceX, 'Jawbone':Jawbone, 'Etsy':Etsy, 'Yelp':Yelp, 'Zendesk':Zendesk, 'AppNexus':AppNexus, 'RocketFuel':RocketFuel, 'Lifesize':Lifesize, 'Medialets':Medialets, "AppFolio":AppFolio, 'Infinera':Infinera, "InteractiveIntelligence":InteractiveIntelligence, 'Spokeo':Spokeo, 'Pinterest':Pinterest, 'TubeMogul':TubeMogul, 'Twilio':Twilio, 'ThumbTack':ThumbTack, 'SurveyMonkey':SurveyMonkey, 'Blackbaud':Blackbaud, 'CodeAcademy':CodeAcademy, 'ClearSlide':ClearSlide}

@@ -72,6 +72,8 @@ class UserPlain():
 			return self.gpa
 		elif num == 6:
 			return self.resume
+		elif num == 6.1:
+			return self.resume_url
 		elif num == 7:
 			return self.address
 		elif num == 8:
