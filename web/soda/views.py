@@ -226,3 +226,9 @@ def data(request):
 	context['profile_len'] = len(profiles)
 	context['app_len'] = len(apps)
 	return render(request, 'data.html', context)
+
+def share(request, user_id):
+	user = User.objects.get(id=user_id)
+	user.num_apps_left_today += 2
+	user.save()
+	return HttpResponse("Ok!!")

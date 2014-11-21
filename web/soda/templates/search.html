@@ -30,6 +30,7 @@
             </div>
             <nav class="collapse navbar-collapse navbar-collapse" role="navigation" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/feedback">Leave Suggestion</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
@@ -53,10 +54,10 @@
                             </ul>
                         </aside>
                         <div id="main">
-                            <div style="margin-bottom:35px; width:600px;">
-                                <p style="color:#666; margin-bottom:15px; float:left;"># automated applications left today: {{ num_apps_left_today }}
+                            <div style="margin-bottom:2px; width:600px;">
+                                <button onclick="share()" style="float:right;">Tell a friend to get additional applications</button>
+                                <p style="color:#666; margin-bottom:1px; float:left;"># automated applications left today: {{ num_apps_left_today }}
                                 </p>
-                                <a href="/feedback" style="cursor:pointer; float:right;">Leave a suggestion please!</a>
                             </div>
                             <div style="width:700px;">
 						    {% for company in companies %}
@@ -73,6 +74,35 @@
                 </div>
             </div>
         </main>
+        <script>
+        function share(){
+            FB.init({
+                appId      : '471459402927292',
+                xfbml      : true,
+                version    : 'v2.2'
+            });
+            FB.ui({
+                method: 'send',
+                name: 'Napkins',
+                link: 'http://napkins.io',
+            },
+            function(response) {
+                if (response) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "/share/{{user.id}}", true);
+                    xhr.send();
+                    alert("succeesss");
+                }
+            });
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
         {% analytical_body_bottom %}
     </body>
 </html>
