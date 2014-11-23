@@ -40,7 +40,7 @@ html, body
 .index .navbar .navbar-brand
 {
     color: white;
-    font-size: 25px;
+    font-size: 23px;
 }
 
 .navbar .navbar-brand
@@ -427,6 +427,11 @@ input
     overflow-y: auto;
     font-weight: 300;
     font-family: "museo-sans", sans-serif;
+}
+
+#sidebar a:hover
+{
+    text-decoration: none;
 }
 
 #sidebar ul
