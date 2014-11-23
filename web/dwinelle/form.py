@@ -50,8 +50,8 @@ def emailFill(user,form):
 		\nBest,\n" + user.getField(1)
 
 def form_fill(user, form):
-	# display = Display(visible=0, size=(800, 600))
-	# display.start()
+	display = Display(visible=0, size=(800, 600))
+	display.start()
 	if form.email != {}:
 		st = emailFill(user, form)
 		email_send("Software Internship Application",st,[form.email['email'], user.getField(2)],attachment=user.getField(6))
@@ -101,7 +101,7 @@ def form_fill(user, form):
 		browser.execute_script('document.getElementsByClassName("' + form.finalSubmit + '")[document.getElementsByClassName("' + form.finalSubmit + '").length-1].click()')
 	time.sleep(10)
 	browser.quit()
-	# display.stop()
+	display.stop()
 
 Affirm = Form("https://jobs.lever.co/affirm/41093734-0492-4f7e-b5ab-7fe53f2143e7/apply", "Affirm")
 Affirm.addFillField('name',1, "Full name")
@@ -337,7 +337,7 @@ Blackbaud.addDropDownField("jvfld-x-uV9Vfwd", 226)
 Blackbaud.addDropDownField("jvfld-x-XV9VfwG", 1)
 Blackbaud.addJSHelper("jvresume", 11)
 Blackbaud.setSubmitJS("$('#jvform').submit();")
-Blackbaud.setSubmitJS('document.getElementById("f0").value="moo";')
+Blackbaud.setSubmitJS('document.getElementById("f0").value="summer 2015";')
 Blackbaud.setSubmitJS('document.getElementById("f2_1").checked=true;')
 Blackbaud.setSubmitJS('document.getElementById("f1").value="$1500-$4500";')
 Blackbaud.setSubmitJS('document.forms[0].submit();')
