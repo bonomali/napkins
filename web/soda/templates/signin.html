@@ -13,7 +13,7 @@
         <style>
             .form-control::-webkit-input-placeholder
             {
-                color: #FFF;
+                color: #888;
             }
         </style>
         {% analytical_head_bottom %}
@@ -42,18 +42,18 @@
             </nav>
         </header>
         <main class="index" role="main">
-            <div class="index-container" style="max-width: 300px">
-                <p class="lead">Sign In</p>
+            <div class="index-container">
+                <p class="lead" style="color: #888 !important">Sign In</p>
                 <form action="/signin/" method="post">
                 {% csrf_token %}
                     {% for field in form %}
                         {% if field.name == "password" %}
-                            <input class="form-control" style="margin-bottom: 25px;color: white; border-bottom: 1px dotted #FFF" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                            <input class="form-control signup-field" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% else %}
-                            <input class="form-control" style="margin-bottom: 25px;color: white; border-bottom: 1px dotted #FFF" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                            <input class="form-control signup-field" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% endif %}
                     {% endfor %}
-                    <input type="submit" style="margin-top: 20px; height: 40px; padding: 8px 0px; width: 120px; font-size: 14px" class="btn btn-outline-inverse btn-lg" value="Sign In" />
+                    <input type="submit" class="signup-button btn btn-outline-inverse btn-lg" value="Sign In" />
                 </form>
             </div>
         </main>

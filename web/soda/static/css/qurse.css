@@ -1,27 +1,49 @@
 html, body
 {
     height: 100%;
-    background-color: #4EC4D3;
+    background-color: #51cdf0;
     font-family: sans-serif;
     background: #fff;
     font-size: 14px;
     line-height: 140%;
 }
 
+.index .navbar
+{
+    background: none;
+    padding-top: 10px;
+}
+
 .navbar
 {
     margin-bottom: 0;
-    background: #4EC4D3;
-    border-bottom: 0
+    background: #51cdf0;
+    border-bottom: 0;
+}
+
+.index .navbar .navbar-nav > li > a
+{
+    color: white;
+    font-size: 0.94em;
+    font-weight: 500;
+    margin-top: 5px;
+    text-transform: uppercase;
 }
 
 .navbar .navbar-brand, .navbar .navbar-nav > li > a
 {
     color: white;
-    font-weight: 500;
+    font-weight: 300;
+    font-size: 14px;
 }
 
-.navbar-brand
+.index .navbar .navbar-brand
+{
+    color: white;
+    font-size: 25px;
+}
+
+.navbar .navbar-brand
 {
     font-size: 22px;
 }
@@ -34,7 +56,7 @@ html, body
 
 .navbar .navbar-toggle .icon-bar
 {
-    background-color: #4EC4D3
+    background-color: #51cdf0;
 }
 
 .navbar .navbar-header .navbar-toggle
@@ -57,8 +79,8 @@ html, body
     position: absolute;
     width: 100%;
     top: 50%;
-    -webkit-transform: translateY(-40%);
-    -moz-transform: translateY(-40%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
 }
 
 html.index, body.index
@@ -68,7 +90,7 @@ html.index, body.index
     font-family: sans-serif;
     font-size: 14px;
     line-height: 140%;
-    background-image: url('/static/napkins.png');
+    background: #ffffff url("/static/napkins.png") center center no-repeat;
     background-size: cover;
 }
 
@@ -81,8 +103,8 @@ main.index
     position: absolute;
     width: 100%;
     top: 50%;
-    -webkit-transform: translateY(-40%);
-    -moz-transform: translateY(-40%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
 }
 
 .form-content
@@ -230,7 +252,30 @@ font-size: 22px;
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
-    opacity: 0.8
+    opacity: 0.85
+}
+
+.form-control.signup-field
+{
+    color: #888 !important;
+    margin-bottom: 25px;
+    border-bottom: 1px dotted #888;
+}
+
+.btn.signup-button
+{
+    border-color: #51cdf0;
+    color: #888;
+    margin-top: 20px;
+    height: 40px;
+    padding: 8px 0px;
+    width: 120px;
+    font-size: 14px;
+}
+
+.btn.signup-button:hover
+{
+    border-color: #51cdf0;
 }
 
 @media (min-width: 992px)
@@ -289,7 +334,7 @@ font-size: 22px;
     color: #fff;
     text-align: center;
     cursor: default;
-    background-color: #4EC4D3;
+    background-color: #51cdf0;
     border-radius: 50%
 }
 
@@ -331,7 +376,7 @@ font-size: 22px;
 .btn-outline-inverse:hover,
 .btn-outline-inverse:focus, .btn-outline-inverse:active
 {
-    color: #4EC4D3;
+    color: #51cdf0;
     text-shadow: none;
     background-color: #fff;
     border-color: #fff
@@ -346,7 +391,7 @@ form .btn-outline-inverse
 form .btn-outline-inverse:hover
 {
     background-color: white;
-    color: #4EC4D3;
+    color: #51cdf0;
 }
 
 input
@@ -400,7 +445,7 @@ input
 .contents
 {
     overflow: hidden;
-    margin: 0 auto;
+    margin: 80px auto;
     box-sizing: content-box;
 }
 
@@ -412,7 +457,7 @@ input
 
 #sidebar ul li.current a, #sidebar ul li a:hover
 {
-    background: #4EC4D3;
+    background: #51cdf0;
     color: #ffffff;
 }
 
@@ -557,7 +602,7 @@ tr:nth-child(even)
     font-weight: 300;
     padding: 8px 18px;
     text-decoration: none;
-    background: #4EC4D3;
+    background: #51cdf0;
     color: #fff;
     width: 170px !important;
     display: block;
@@ -567,16 +612,16 @@ tr:nth-child(even)
 
 .button-table:hover
 {
-    background: #b02222;
+    background: #31add0;
 }
 .button-alternate
 {
-    background: #4EC4D3;
+    background: #51cdf0;
 }
 
 .button-alternate:hover
 {
-    background: #b02222;
+    background: #31add0;
 }
 
 .button-fill, .button-fill:hover

@@ -1,6 +1,6 @@
 {% load analytical %}
 <!DOCTYPE html>
-<html lang="en" class="index">
+<html lang="en">
     <head>
         {% analytical_head_top %}
         <meta charset="utf-8">
@@ -12,7 +12,7 @@
         <link href="/static/css/qurse.css" rel="stylesheet">
         {% analytical_head_bottom %}
     </head>
-    <body class="index">
+    <body>
         {% analytical_body_top %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
         </script>
@@ -30,17 +30,24 @@
             </div>
             <nav class="collapse navbar-collapse navbar-collapse" role="navigation" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/feedback">Leave Feedback</a></li>
                     <li><a href="/about">About</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </nav>
         </header>
-        <main class="index" role="main" >
-            <div class="index-container">
-                <span class="main-content-icon main-content-icon-lg main-content-icon-outline">N</span>
-                <p class="lead">{{ message }}</p>
-                <p class="lead">
-                    <a href="/search" class="btn btn-outline-inverse btn-lg">Back</a>
-                </p>
+        <main class="main-content" id="content" role="main" >
+            <div id="container">
+                <div id="content">
+                    <div class="contents">
+                        <div id="main" style="width:600px; padding-left:95px; line-height: 2.5em">
+                            <p>{{ message }}</p>
+                            <p>
+                                <a href="/search" class="signup-button btn btn-outline-inverse btn-lg">Back</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
         {% analytical_body_bottom %}
