@@ -18,7 +18,7 @@
         </style>
         {% analytical_head_bottom %}
     </head>
-    <body class="index">
+    <body class="index" style="background-color: white; background-image: url('/static/napkins.png'); background-size: cover;">
         {% analytical_body_top %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
         </script>
@@ -42,18 +42,18 @@
             </nav>
         </header>
         <main class="index" role="main">
-            <div class="index-container" style="max-width: 300px">
-                <p class="lead">Sign Up</p>
+            <div class="index-container" style="background: white; opacity: 0.8; max-width: 300px; padding-top: 50px; padding-bottom: 50px; color: #888 !important">
+                <p class="lead" style="color: #888 !important">Sign Up</p>
                 <form action="/signup/" method="post">
                 {% csrf_token %}
                     {% for field in form %}
                         {% if field.name == "password" %}
-                            <input class="form-control" style="margin-bottom: 25px;color: white; border-bottom: 1px dotted #FFF" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                            <input class="form-control" style="color: #888 !important; margin-bottom: 25px;color: white; border-bottom: 1px dotted #FFF" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% else %}
-                            <input class="form-control" style="margin-bottom: 25px;color: white; border-bottom: 1px dotted #FFF" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                            <input class="form-control" style="color: #888 !important; margin-bottom: 25px;color: white; border-bottom: 1px dotted #FFF" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% endif %}
                     {% endfor %}
-                    <input type="submit" style="margin-top: 20px; height: 40px; padding: 8px 0px; width: 120px; font-size: 14px" class="btn btn-outline-inverse btn-lg" value="Sign Up" />
+                    <input type="submit" style="color: #888 !important; margin-top: 20px; height: 40px; padding: 8px 0px; width: 120px; font-size: 14px" class="btn btn-outline-inverse btn-lg" value="Sign Up" />
                 </form>
             </div>
         </main>

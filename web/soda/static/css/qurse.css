@@ -1,7 +1,7 @@
 html, body
 {
     height: 100%;
-    background-color: #c04242;
+    background-color: #4EC4D3;
     font-family: sans-serif;
     background: #fff;
     font-size: 14px;
@@ -11,7 +11,7 @@ html, body
 .navbar
 {
     margin-bottom: 0;
-    background: #c04242;
+    background: #4EC4D3;
     border-bottom: 0
 }
 
@@ -34,11 +34,12 @@ html, body
 
 .navbar .navbar-toggle .icon-bar
 {
-    background-color: #c04242
+    background-color: #4EC4D3
 }
 
 .navbar .navbar-header .navbar-toggle
 {
+    background: white;
     border-color: #fff
 }
 
@@ -63,10 +64,12 @@ html, body
 html.index, body.index
 {
     height: 100%;
-    background-color: #c04242;
+    background-color: white;
     font-family: sans-serif;
     font-size: 14px;
     line-height: 140%;
+    background-image: url('/static/napkins.png');
+    background-size: cover;
 }
 
 main.index
@@ -223,6 +226,11 @@ font-size: 22px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    background: white;
+    max-width: 350px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    opacity: 0.8
 }
 
 @media (min-width: 992px)
@@ -281,7 +289,7 @@ font-size: 22px;
     color: #fff;
     text-align: center;
     cursor: default;
-    background-color: #c04242;
+    background-color: #4EC4D3;
     border-radius: 50%
 }
 
@@ -323,7 +331,7 @@ font-size: 22px;
 .btn-outline-inverse:hover,
 .btn-outline-inverse:focus, .btn-outline-inverse:active
 {
-    color: #c04242;
+    color: #4EC4D3;
     text-shadow: none;
     background-color: #fff;
     border-color: #fff
@@ -338,7 +346,7 @@ form .btn-outline-inverse
 form .btn-outline-inverse:hover
 {
     background-color: white;
-    color: #c04242;
+    color: #4EC4D3;
 }
 
 input
@@ -404,7 +412,7 @@ input
 
 #sidebar ul li.current a, #sidebar ul li a:hover
 {
-    background: #c04242;
+    background: #4EC4D3;
     color: #ffffff;
 }
 
@@ -549,7 +557,7 @@ tr:nth-child(even)
     font-weight: 300;
     padding: 8px 18px;
     text-decoration: none;
-    background: #c04242;
+    background: #4EC4D3;
     color: #fff;
     width: 170px !important;
     display: block;
@@ -563,7 +571,7 @@ tr:nth-child(even)
 }
 .button-alternate
 {
-    background: #c04242;
+    background: #4EC4D3;
 }
 
 .button-alternate:hover
