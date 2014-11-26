@@ -41,6 +41,9 @@
                     <div class="contents" style="color: #777c87; line-height: 2.5em; margin-top: 100px">
                             <p style="font-size: 22px;">{{ company.name }} - Software Engineering Internship</p>
                             <p>{{ company.description }}</p>
+                            {% if has_applied %}
+                                <p style="color:red">you have applied to the company before</p>
+                            {% endif %}
                             <p style="margin-top: 30px">
                                 <a href="{{ company.links}}" class="signup-button btn btn-outline-inverse btn-lg">Apply manually</a>
                                 <a href="/preview/{{company.id}}" class="signup-button btn btn-outline-inverse btn-lg">Preview</a>

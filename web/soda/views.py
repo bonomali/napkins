@@ -40,8 +40,10 @@ def search(request):
 
 @login_required(login_url='/signin/')
 def company(request, company_id):
+	user = User.objects.get(email=request.user)
 	context = {}
 	context['company'] = Company.objects.filter(id=company_id)[0]
+	context['has_applied'] = Application.objects.filter(user=user, company=context['company'])
 	return render(request, 'company.html', context)
 
 @login_required(login_url='/signin/')
