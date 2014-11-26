@@ -57,10 +57,10 @@
                             </ul>
                         </aside>
                         <div id="main">
-                            <div style="margin-bottom:20px; width:600px;">
-                                <p style="color:#666; margin-bottom:1px;">Applications left for today: {{ num_apps_left_today }}
-                                </p><br/>
-                                <button class="button-alternate btn" onclick="share()" style="color: white;">Get additional applications</button>
+                            <div style="width:600px; display:block; height:50px;">
+                                <p style="color:#666; margin-bottom:1px; float:left;">Applications left for today: {{ num_apps_left_today }}
+                                </p>
+                                <button class="button-alternate btn" onclick="share()" style="color: white; float:right;">Get additional applications</button>
                             </div>
                             <div style="max-width: 615px; text-align: center">
 						    {% for company in companies %}

@@ -43,21 +43,22 @@
             </nav>
         </header>
         <main class="index" role="main">
-            <div class="index-container">
+            <div class="index-container" style="padding-bottom:20px;">
                 <span class="main-content-icon main-content-icon-lg main-content-icon-outline" style="color:  #51cdf0; border-color: #51cdf0;">N</span>
-                <p class="lead" style="font-size: 18px; margin-top: 50px; margin-bottom: 20px; color: #888">Job applications made easy.</p>
+                <p class="lead" style="font-size: 18px; margin-top: 30px; margin-bottom: 20px; color: #888">Job applications made easy.</p>
                 <p class="lead" style="margin-bottom:0px !important">
-                    <a href="/signup" class="btn btn-outline-inverse btn-lg" style="border-color: #51cdf0; color: #888">Start</a><br/><br/>
-                    <a id="companies" style="color:#51cdf0;margin-top: 10px; cursor: pointer;" onclick="$('html, body').animate({scrollTop: document.body.clientHeight}, 1000);">Companies</a>
+                    <a href="/signup" class="btn btn-outline-inverse btn-lg" style="border-color: #51cdf0; color: #888">Sign up</a>
+                    <a class="btn btn-outline-inverse btn-lg" style="border-color: #51cdf0; color: #888; margin-top:10px;" onclick="$('html, body').animate({scrollTop: document.body.clientHeight}, 1000);">Tour</a>
                 </p>
             </div>
         </main>
         <div id="secondary" style="z-index: 10000; background: white; position: absolute; width: 100%; display: block; text-align: center">
             <div style="margin-left: auto; margin-right: auto; padding-bottom: 50px; padding-left: 50px; padding-right: 50px">
-            <h1 style="font-size: 24px; padding-top: 20px; color: black">Supported Companies</h1>
+            <a href="/about"><h1 style="font-size: 24px; padding-top: 20px; border-color: #51cdf0; color: #888; cursor:pointer; margin-top:70px;">[How it works]</h1></a>
+
             {% for company in companies %}
                 <div style="display: inline-block; margin-bottom: 20px; height:130px; width:120px;">
-                    <a href="/company/{{company.id}}" style="margin-right:10px;">
+                    <a href="{{company.links}}" style="margin-right:10px;">
                     <p class="listing" style="overflow:hidden">{{company.name}}</p>
                     <img style="height:80px; border: 1px solid #ccc; border-radius: 40px; width:80px;" src="{{company.img}}"></img>
                     </a>
