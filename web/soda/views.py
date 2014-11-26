@@ -123,10 +123,6 @@ def logout(request):
 	lgout(request)
 	return HttpResponseRedirect('/')
 
-def feedback(request):
-	context = {}
-	return render(request, 'feedback.html', context)
-
 @login_required(login_url='/signin/')
 def profile(request):
 	user = User.objects.get(email=request.user)

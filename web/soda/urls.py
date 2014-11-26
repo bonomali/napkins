@@ -17,6 +17,5 @@ urlpatterns = patterns('',
     url(r'^confirm_app/$', views.confirm_app, name="confirm_app"),
     url(r'^share/(?P<user_id>[-\w]+)/$', views.share, name="share"),
 
-    url(r'^feedback/$', views.feedback, name="feedback"),
     url(r'^data/$', views.data, name="data"),
 )
