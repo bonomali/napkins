@@ -23,6 +23,7 @@ def index(request):
 	if user:
 		return HttpResponseRedirect("/search/")
 	context = {}
+	context['companies'] = Company.objects.all()
 	return render(request, 'index.html', context)
 
 def about(request):

@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
         <title>napkins</title>
         <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
         <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +34,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/about">About</a></li>
                     <li><a href="/logout">Logout</a></li>
+                    <li class="hidden-sm hidden-md hidden-lg"><a href="/search">Search</a></li>
+                    <li class="hidden-sm hidden-md hidden-lg"><a href="/history">History</a></li>
+                    <li class="hidden-sm hidden-md hidden-lg"><a href="/profile">Profile</a></li>
                 </ul>
             </nav>
         </header>
@@ -40,14 +44,14 @@
             <div id="container" >
                 <div id="content">
                     <div class="contents">
-                        <div id="main" style="padding-left:25px;" align="center">
+                        <div id="main" align="center">
                             <form action="/coverletter/" method="post">
                                 {% csrf_token %}
                                 {% for field in form %}
                                     {% if field.value %}
-                                        <textarea class="form-control" style="border-bottom: 1px dotted #777; height:300px; width:500px;" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">{{ field.value }}</textarea>
+                                        <textarea class="form-control" style="border: 1px dotted #777; height:300px; width:500px;" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">{{ field.value }}</textarea>
                                     {% else %}
-                                        <textarea class="form-control" style="border-bottom: 1px dotted #777; height:300px; width:500px;" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}"> Enter coverletter here!</textarea>
+                                        <textarea class="form-control" style="border: 1px dotted #777; height:300px; width:500px;" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}"> Enter coverletter here!</textarea>
                                     {% endif %}
                                 {% endfor %}
                                 <p style="font-size:13px;color:#777;">Note: Reference a specific company as '[company]'<br>for example: Hello [company], my name is... --> Hello Google, name is... </p>
@@ -56,9 +60,6 @@
                                 </div>
                             </form>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
