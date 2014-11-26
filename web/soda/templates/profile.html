@@ -59,12 +59,12 @@
                                 {% csrf_token %}
                                 {% for field in form %}
                                     {% if field|is_resume %}
-                                        <p style="color:#000">Resume(.pdf): 
+                                        <p style="color:#000">Resume: 
                                         {% if resume_url %}
                                         (<a href="{{ resume_url }}" target="_blank">current</a>)
                                         {% endif %}
                                         </p>
-                                        <input class="form-control" style="border-bottom: 1px dotted #777" type="file" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" value="{{ field.value }}">
+                                        <input class="form-control" style="border-bottom: 1px dotted #777" type="file" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" value="{{ field.value }}" accept="application/pdf">
                                     {% elif field.value %}
                                         <input class="form-control" style="border-bottom: 1px dotted #777" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" value="{{ field.value }}">
                                     {% else %}
