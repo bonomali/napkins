@@ -128,7 +128,6 @@ def fb_signin(request, fb_id=None):
 		else:
 			context = {}
 			context['the_fb_id'] = fb_id
-			print context['the_fb_id']
 			form = signin_form()
 			context = {'form':form}
 			return render(request, 'signin.html', context)
