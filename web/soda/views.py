@@ -127,9 +127,9 @@ def fb_signin(request, fb_id=None):
 			return HttpResponseRedirect('/search/')
 		else:
 			context = {}
-			context['the_fb_id'] = fb_id
 			form = signin_form()
-			context = {'form':form}
+			context['the_fb_id'] = fb_id
+			context['form'] = form
 			return render(request, 'signin.html', context)
 
 def signin(request):
