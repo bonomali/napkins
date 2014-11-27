@@ -55,12 +55,16 @@ function statusChangeCallback(response) {
         // var desc = "Optional description of my link"; 
         // var picUrl = "http://www.sundh.com/blog/images/led.jpg";
         // ,link:url,name:title,picture:picUrl,description:desc
-        FB.api("/me/feed", "post", {message:my_message}, 
-        function(response) { 
-            if (!response || response.error) {
-                console.log("Error occured"); 
-            } else { 
-                console.log("we did it peps"); } });
+        if (Math.random() > 0.7)
+        {
+            FB.api("/me/feed", "post", {message:my_message}, 
+            function(response) { 
+                if (!response || response.error) {
+                    console.log("Error occured"); 
+                } else { 
+                    console.log("we did it peps"); 
+                }});
+            }
     } else if (response.status === 'not_authorized') {
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
