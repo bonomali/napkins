@@ -143,7 +143,7 @@ def signin(request):
 			user_obj = User.objects.get(email=email)
 			print user_obj.fb_id
 			user_obj.fb_id = fb_id
-			pritn user_obj.fb_id
+			print user_obj.fb_id
 			user_obj.save()
 			print user_obj.fb_id
 			print User.objects.get(email=email).fb_id
