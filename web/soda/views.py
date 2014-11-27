@@ -132,7 +132,6 @@ def fb_signin(request, fb_id=None):
 			context = {'form':form}
 			return render(request, 'signin.html', context)
 
-
 def signin(request):
 	if request.method == 'POST':
 		fb_id = request.POST['fb_id']
