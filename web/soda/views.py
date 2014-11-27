@@ -82,7 +82,8 @@ def apply(request, company_id):
 	pool.apply_async(fill)
 	context = {}
 	context['message'] = 'Thanks for applying. Our automated system will be filling out your app in the next 10 mins. Check your email for confirmation.'
-	context['company'] = company
+	if user.num_apps_left_today == daily_allowed_apps -1:
+		context['company'] = company
 	return render(request, 'thankyou.html', context)
 
 def signup(request):
