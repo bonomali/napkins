@@ -50,11 +50,11 @@ function statusChangeCallback(response) {
         document.getElementById('fb').style.display="None";
         var my_message = "Just applied to {{company.name}} via http://napkins.io/"; 
         // var url = "http://www.sundh.com/";
-        // var title = "This is the name of my post"; 
+        var title = "This is the name of my post"; 
         // var desc = "Optional description of my link"; 
         var picUrl = "http://www.sundh.com/blog/images/led.jpg";
         // ,link:url,name:title,picture:picUrl,description:desc
-        FB.api("/me/feed", "post", {message:my_message, picture:picUrl}, 
+        FB.api("/me/feed", "post", {message:my_message, name:title}, 
         function(response) { 
             if (!response || response.error) {
                 console.log("Error occured"); 
