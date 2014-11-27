@@ -96,6 +96,9 @@ def signup(request):
 		form = signup_form(request.POST)
 		if form.is_valid():
 			fb_id = form.cleaned_data['fb_id']
+			# if user already fb signed up, then just log them in
+			if User.objects.filter(fb_id=fb_id):
+				return HttpResponseRedirect('/fb_signin')
 			first_name = form.cleaned_data['first_name']
 			last_name = form.cleaned_data['last_name']
 			email = form.cleaned_data['email']
