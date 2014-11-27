@@ -10,7 +10,6 @@ conn = boto.connect_s3(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 bucket_name = "qurse-warehouse"
 bucket = conn.get_bucket(bucket_name, validate=False)
 
-db_file = "db.sqlite3"
 from boto.s3.key import Key
 k = Key(bucket)
 
@@ -20,8 +19,11 @@ def percent_cb(complete, total):
     sys.stdout.flush()
 
 def backup():
-	print "uploading " + datetime.datetime.now().strftime("%y/%m/%d/db.sqlite3")
-	k.key = datetime.datetime.now().strftime("%y/%m/%d/db.sqlite3")
+	f = open("datadump.json", "w")
+	call(["python", "manage.py", "dumpdata"], stdout=f)
+	db_file = "datadump.json"
+	print "uploading " + datetime.datetime.now().strftime("%y/%m/%d/datadump.json")
+	k.key = datetime.datetime.now().strftime("%y/%m/%d/datadump.json")
 	k.set_contents_from_filename(db_file, cb=percent_cb, num_cb=10)
 
 def reset_daily_quota():
