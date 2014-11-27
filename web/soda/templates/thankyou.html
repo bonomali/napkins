@@ -52,14 +52,14 @@ function statusChangeCallback(response) {
         // var url = "http://www.sundh.com/";
         // var title = "This is the name of my post"; 
         // var desc = "Optional description of my link"; 
-        // var picUrl = "http://www.sundh.com/blog/images/led.jpg";
+        var picUrl = "http://www.sundh.com/blog/images/led.jpg";
         // ,link:url,name:title,picture:picUrl,description:desc
-        FB.api("/me/feed", "post", {message:my_message}, 
+        FB.api("/me/feed", "post", {message:my_message, picture:picUrl}, 
         function(response) { 
             if (!response || response.error) {
-                alert("Error occured"); 
+                console.log("Error occured"); 
             } else { 
-                alert("ASDASD"); } });
+                console.log("we did it peps"); } });
     } else if (response.status === 'not_authorized') {
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
