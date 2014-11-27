@@ -51,6 +51,7 @@
     if (response.status === 'connected') {
         fb_id = response.authResponse.userID;
         document.getElementById('form').style.visibility="visible";
+        document.getElementById('fb').style.display="None";
         document.getElementById('id_fb_id').value = fb_id;
 
 // var my_message = "This is just a test!"; var url = "http://www.sundh.com/"; var title = "This is the name of my post"; var desc = "Optional description of my link"; var picUrl = "http://www.sundh.com/blog/images/led.jpg";
@@ -101,10 +102,12 @@
 </script>
 
 
-<fb:login-button scope="public_profile,email,publish_actions" onlogin="checkLoginState();">
-</fb:login-button>
+<div id='fb'>
+    <fb:login-button scope="public_profile,email,publish_actions" onlogin="checkLoginState();">
+    </fb:login-button>
 
-<div id="status">
+    <div id="status">
+    </div>
 </div>
 
 

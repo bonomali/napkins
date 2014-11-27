@@ -16,3 +16,6 @@ sudo apt-get install firefox
 sudo apt-get install xvfb
 sudo Xvfb :10 -ac
 export DISPLAY=:10
+
+./manage.py migrate soda 0001 --fake
+./manage.py migrate soda 0002
