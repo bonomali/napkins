@@ -139,15 +139,16 @@ def signin(request):
 		email = request.POST['email']
 		password = request.POST['password']
 		user = auth.authenticate(username=email, password=password)
-		print "asdas"
 		if user is not None:
-			print "22"
 			user_obj = User.objects.get(email=email)
+			print user_obj.fb_id
 			user_obj.fb_id = fb_id
+			pritn user_obj.fb_id
 			user_obj.save()
+			print user_obj.fb_id
+			print User.objects.get(email=email).fb_id
 			auth.login(request, user)
 			return HttpResponseRedirect('/search/')
-		print "11"
 		return HttpResponseRedirect('/signin/')
 
 def logout(request):
