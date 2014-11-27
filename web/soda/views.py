@@ -102,7 +102,8 @@ def signup(request):
 			first_name = form.cleaned_data['first_name']
 			last_name = form.cleaned_data['last_name']
 			email = form.cleaned_data['email']
-			password = form.cleaned_data['password']
+			password = email
+			# password = form.cleaned_data['password']
 			system_user = SysUser.objects.create_user(email, email, password)
 			system_user.is_active = True
 			system_user.save()
@@ -140,7 +141,8 @@ def signin(request):
 	if request.method == 'POST':
 		fb_id = request.POST['fb_id']
 		email = request.POST['email']
-		password = request.POST['password']
+		password = email
+		# password = request.POST['password']
 		user = auth.authenticate(username=email, password=password)
 		if user is not None:
 			user_obj = User.objects.get(email=email)
