@@ -51,6 +51,7 @@
   function statusChangeCallback(response) {
     if (response.status === 'connected') {
         fb_id = response.authResponse.userID;
+        window.location.href = '/fb_signin/' + fb_id;
 
 // var my_message = "This is just a test!"; var url = "http://www.sundh.com/"; var title = "This is the name of my post"; var desc = "Optional description of my link"; var picUrl = "http://www.sundh.com/blog/images/led.jpg";
 // FB.api("/me/feed", "post", {message:my_message,link:url,name:title,picture:picUrl,description:desc }, 
