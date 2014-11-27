@@ -586,4 +586,45 @@ Airware.addFillField('job_application[answers_attributes][2][text_value]',14, "P
 Airware.hasGreenHouseResume()
 Airware.setFinalSubmit("button")
 
-form_dict = {'Quora':Quora, 'Box':Box, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB, 'Nest':Nest, 'SpaceX':SpaceX, 'Jawbone':Jawbone, 'Etsy':Etsy, 'Yelp':Yelp, 'Zendesk':Zendesk, 'AppNexus':AppNexus, 'RocketFuel':RocketFuel, 'Lifesize':Lifesize, 'Medialets':Medialets, "AppFolio":AppFolio, 'Infinera':Infinera, 'Spokeo':Spokeo, 'Pinterest':Pinterest, 'TubeMogul':TubeMogul, 'Twilio':Twilio, 'ThumbTack':ThumbTack, 'SurveyMonkey':SurveyMonkey, 'Blackbaud':Blackbaud, 'CodeAcademy':CodeAcademy, 'ClearSlide':ClearSlide, 'OPower':OPower, 'HomeJoy':HomeJoy, 'MarinSoftware':MarinSoftware, 'Qualtrics':Qualtrics, 'Airbnb':Airbnb, 'KhanAcademy':KhanAcademy, 'RiotGames':RiotGames, 'Airware':Airware, 'GrubHub':GrubHub, 'Xamarin':Xamarin, 'Imprivata':Imprivata, "Zynga":Zynga, "Zazzle":Zazzle, "IXLLearning":IXLLearning, "Cloudera":Cloudera, "Pandora":Pandora, "Indiegogo":Indiegogo}
+Mozilla = Form("https://hire.jobvite.com/CompanyJobs/Careers.aspx?k=Apply&c=qpX9Vfwa&j=oOXTZfwn&utm_medium=referral&s=PDN&utm_source=careers.mozilla.org", "Mozilla")
+Mozilla.addJSHelper("jvresume",11)
+Mozilla.addFillField("jvfirstname",1.1, "First Name")
+Mozilla.addFillField("jvlastname",1.2, "Last Name")
+Mozilla.addFillField("jvemail",2, "Email")
+Mozilla.addFillField("jvphone",3, "Phone")
+Mozilla.addFillField("jvfld-x-sV9Vfwb", 8, "City")
+Mozilla.addFillField("jvfld-x-XV9VfwG", 9.1, "Zipcode")
+Mozilla.addFillField("jvfld-x-tV9Vfwc", 9, "State")
+Mozilla.addDropDownField("jvfld-x-uV9Vfwd", 226)
+Mozilla.addFillField("jvfld-x3r9Vfwi", 12, "Github url")
+Mozilla.addDropDownField("jvfld-xYbiVfw6", 1)
+Mozilla.addFillField("jvcoverletter", 14, "Personal website")
+Mozilla.setFinalSubmit("kpbutton")
+
+AvantCredit = Form("https://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qxT9Vfwe&page=Apply&j=oW5FZfwp", "AvantCredit")
+AvantCredit.addFillField("jvfirstname",1.1, "First Name")
+AvantCredit.addFillField("jvlastname",1.2, "Last Name")
+AvantCredit.addFillField("jvemail",2, "Email")
+AvantCredit.addFillField("jvphone",3, "Phone")
+AvantCredit.addJSHelper("jvresume",11)
+AvantCredit.setFinalSubmit("btn")
+
+MuleSoft = Form("http://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qR09VfwF&cs=9pbaVfwp&jvresize=http%3a%2f%2fwww.mulesoft.com%2fsites%2fall%2fthemes%2fmulesoft%2fFrameResize1.html&page=Apply&j=opfBZfwY", "MuleSoft")
+MuleSoft.addFillField("jvfirstname",1.1, "First Name")
+MuleSoft.addFillField("jvlastname",1.2, "Last Name")
+MuleSoft.addFillField("jvemail",2, "Email")
+MuleSoft.addFillField("jvphone",3, "Phone")
+MuleSoft.addJSHelper("jvresume",11)
+MuleSoft.addFillField("jvfld-x-sV9Vfwb", 8, "City")
+MuleSoft.addDropDownField("jvfld-x-XV9VfwG", 5)
+MuleSoft.setSubmitJS("$('#jvform').submit();");
+
+Barracuda = Form("https://hire.jobvite.com/CompanyJobs/Careers.aspx?c=qTN9Vfwu&page=Apply&j=okKAZfwn", "Barracuda")
+Barracuda.addFillField("jvfirstname",1.1, "First Name")
+Barracuda.addFillField("jvlastname",1.2, "Last Name")
+Barracuda.addFillField("jvemail",2, "Email")
+Barracuda.addFillField("jvphone",3, "Phone")
+Barracuda.addJSHelper("jvresume",11)
+Barracuda.setFinalSubmit("btn")
+
+form_dict = {'Quora':Quora, 'Box':Box, 'Affirm':Affirm, 'Stripe':Stripe, 'Arista':Arista, 'EA':EA, 'Square':Square, 'MongoDB':MongoDB, 'Nest':Nest, 'SpaceX':SpaceX, 'Jawbone':Jawbone, 'Etsy':Etsy, 'Yelp':Yelp, 'Zendesk':Zendesk, 'AppNexus':AppNexus, 'RocketFuel':RocketFuel, 'Lifesize':Lifesize, 'Medialets':Medialets, "AppFolio":AppFolio, 'Infinera':Infinera, 'Spokeo':Spokeo, 'Pinterest':Pinterest, 'TubeMogul':TubeMogul, 'Twilio':Twilio, 'ThumbTack':ThumbTack, 'SurveyMonkey':SurveyMonkey, 'Blackbaud':Blackbaud, 'CodeAcademy':CodeAcademy, 'ClearSlide':ClearSlide, 'OPower':OPower, 'HomeJoy':HomeJoy, 'MarinSoftware':MarinSoftware, 'Qualtrics':Qualtrics, 'Airbnb':Airbnb, 'KhanAcademy':KhanAcademy, 'RiotGames':RiotGames, 'Airware':Airware, 'GrubHub':GrubHub, 'Xamarin':Xamarin, 'Imprivata':Imprivata, "Zynga":Zynga, "Zazzle":Zazzle, "IXLLearning":IXLLearning, "Cloudera":Cloudera, "Pandora":Pandora, "Indiegogo":Indiegogo, "Barracuda":Barracuda, "Mozilla":Mozilla, "MuleSoft":MuleSoft, "AvantCredit":AvantCredit}
