@@ -9,10 +9,10 @@ class Company(models.Model):
 
 daily_allowed_apps = 5
 class User(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=130)
+    last_name = models.CharField(max_length=130)
     email = models.EmailField()
-    password = models.CharField(max_length=30)
+    password = models.CharField(max_length=130)
     num_apps_left_today = models.IntegerField(default=daily_allowed_apps)
     profile = models.ForeignKey('Profile', null=True, default=None)
 
@@ -30,19 +30,19 @@ public_storage = s3boto.S3BotoStorage(
 )
 
 class Profile(models.Model):
-    github_url = models.CharField(max_length=50, default="")
-    linkedin_url = models.CharField(max_length=50, default="")
-    personal_site_url = models.CharField(max_length=50, default="")
+    github_url = models.CharField(max_length=250, default="")
+    linkedin_url = models.CharField(max_length=250, default="")
+    personal_site_url = models.CharField(max_length=250, default="")
 
     phone = models.CharField(max_length=50, default="")
-    college = models.CharField(max_length=50, default="")
+    college = models.CharField(max_length=150, default="")
     gpa = models.CharField(max_length=10, default="")
-    address = models.CharField(max_length=30, default="")
-    city = models.CharField(max_length=30, default="")
-    state = models.CharField(max_length=30, default="")
-    zipcode = models.CharField(max_length=30, default="")
+    address = models.CharField(max_length=230, default="")
+    city = models.CharField(max_length=130, default="")
+    state = models.CharField(max_length=130, default="")
+    zipcode = models.CharField(max_length=130, default="")
 
-    coverletter = models.CharField(max_length=1500, default="")
+    coverletter = models.CharField(max_length=15000, default="")
     resume = models.FileField(("Resume"), upload_to=upload_resume_to, blank=True, default=None, storage=public_storage)
 
 class Application(models.Model):
