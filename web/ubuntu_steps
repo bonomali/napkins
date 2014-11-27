@@ -1,0 +1,6 @@
+sudo apt-get install mysql-server
+sudo service mysql restart
+sudo apt-get install libmysqlclient-dev python-dev
+sudo pip install MySQL-python
+create database soda DEFAULT CHARACTER SET utf8;
+alter table auth_user modify username varchar(255);
