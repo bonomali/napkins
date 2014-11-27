@@ -13,3 +13,4 @@ selenium==2.44.0
 splinter==0.7.0
 pyPdf==1.13
 django-analytical==0.19.0
+MySQL-python==1.2.5

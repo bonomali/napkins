@@ -4,8 +4,8 @@ from storages.backends import s3boto
 class Company(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=5000)
-    img = models.CharField(max_length=100)
-    links = models.CharField(max_length=100)
+    img = models.CharField(max_length=500)
+    links = models.CharField(max_length=500)
 
 daily_allowed_apps = 5
 class User(models.Model):
