@@ -43,70 +43,6 @@
             </nav>
         </header>
         <main class="index" role="main">
-
-
-<script>
-  function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-        fb_id = response.authResponse.userID;
-
-// var my_message = "This is just a test!"; var url = "http://www.sundh.com/"; var title = "This is the name of my post"; var desc = "Optional description of my link"; var picUrl = "http://www.sundh.com/blog/images/led.jpg";
-// FB.api("/me/feed", "post", {message:my_message,link:url,name:title,picture:picUrl,description:desc }, 
-//     function(response) { 
-//         if (!response || response.error) {
-//          alert("Error occured"); 
-//         } else { 
-//             alert("ASDASD"); } });
-    } else if (response.status === 'not_authorized') {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1500765426863172',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.1' // use version 2.1
-  });
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-
-<fb:login-button scope="public_profile,email,publish_actions" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
-
-
-
-
             <div class="index-container">
                 <p class="lead" style="color: #888 !important">Sign In</p>
                 <form action="/signin/" method="post">
@@ -114,6 +50,8 @@
                     {% for field in form %}
                         {% if field.name == "password" %}
                             <input class="form-control signup-field" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                        {% elif field.name == "fb_id" %}
+                            <input class="form-control signup-field" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" style="display:none" value="{{ fb_id }}">
                         {% else %}
                             <input class="form-control signup-field" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% endif %}
