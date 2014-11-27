@@ -127,7 +127,8 @@ def fb_signin(request, fb_id=None):
 			return HttpResponseRedirect('/search/')
 		else:
 			context = {}
-			context['fb_id'] = fb_id
+			context['the_fb_id'] = fb_id
+			print context['the_fb_id']
 			form = signin_form()
 			context = {'form':form}
 			return render(request, 'signin.html', context)
@@ -141,12 +142,8 @@ def signin(request):
 		user = auth.authenticate(username=email, password=password)
 		if user is not None:
 			user_obj = User.objects.get(email=email)
-			print user_obj.fb_id
 			user_obj.fb_id = fb_id
-			print user_obj.fb_id
 			user_obj.save()
-			print user_obj.fb_id
-			print User.objects.get(email=email).fb_id
 			auth.login(request, user)
 			return HttpResponseRedirect('/search/')
 		return HttpResponseRedirect('/signin/')
