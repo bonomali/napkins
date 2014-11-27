@@ -50,8 +50,11 @@
   function statusChangeCallback(response) {
     if (response.status === 'connected') {
         fb_id = response.authResponse.userID;
+        //now show the invisible form
         document.getElementById('form').style.visibility="visible";
+        //make fb login button disappear
         document.getElementById('fb').style.display="None";
+        //fill in the fb id
         document.getElementById('id_fb_id').value = fb_id;
 
 // var my_message = "This is just a test!"; var url = "http://www.sundh.com/"; var title = "This is the name of my post"; var desc = "Optional description of my link"; var picUrl = "http://www.sundh.com/blog/images/led.jpg";
