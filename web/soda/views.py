@@ -94,7 +94,7 @@ def signup(request):
 	elif request.method == 'POST':
 		form = signup_form(request.POST)
 		if form.is_valid():
-			print form.cleaned_data['fb_id']
+			fb_id = form.cleaned_data['fb_id']
 			first_name = form.cleaned_data['first_name']
 			last_name = form.cleaned_data['last_name']
 			email = form.cleaned_data['email']
@@ -102,9 +102,10 @@ def signup(request):
 			system_user = SysUser.objects.create_user(email, email, password)
 			system_user.is_active = True
 			system_user.save()
-			our_user = User(first_name=first_name, last_name=last_name, email=email, password=password)
+			our_user = User(fb_id=fb_id, first_name=first_name, last_name=last_name, email=email, password=password)
 			our_user.save()
-			return HttpResponseRedirect('/signin')
+			user = auth.authenticate(username=email, password=password)
+			return HttpResponseRedirect('/search')
         return HttpResponseRedirect('/signup')
 
 def signin(request):
