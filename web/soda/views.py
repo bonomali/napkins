@@ -30,7 +30,7 @@ def about(request):
 	context = {}
 	return render(request, 'about.html', context)
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def search(request):
 	user = User.objects.get(email=request.user)
 	context = {}
@@ -39,7 +39,7 @@ def search(request):
 	context['user'] = request.user
 	return render(request, 'search.html', context)
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def company(request, company_id):
 	user = User.objects.get(email=request.user)
 	context = {}
@@ -47,7 +47,7 @@ def company(request, company_id):
 	context['has_applied'] = Application.objects.filter(user=user, company=context['company'])
 	return render(request, 'company.html', context)
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def company_preview(request, company_id):
 	user = User.objects.get(email=request.user)
 	if not user.profile or not user.profile.resume:
@@ -59,7 +59,7 @@ def company_preview(request, company_id):
 	context = {'fields':fields, 'company':company}
 	return render(request, 'preview.html', context)
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def apply(request, company_id):
 	user = User.objects.get(email=request.user)
 	company = Company.objects.filter(id=company_id)[0]
@@ -151,7 +151,7 @@ def logout(request):
 	lgout(request)
 	return HttpResponseRedirect('/')
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def profile(request):
 	user = User.objects.get(email=request.user)
 	if request.method == "GET":
@@ -203,7 +203,7 @@ def profile(request):
 		return HttpResponseRedirect('/search/')
 
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def coverletter(request):
 	user = User.objects.get(email=request.user)
 	if request.method == "GET":
@@ -226,7 +226,7 @@ def coverletter(request):
 		return HttpResponseRedirect('/profile/')
 
 
-@login_required(login_url='/signin/')
+@login_required(login_url='/fb_signin/')
 def history(request):
 	user = User.objects.get(email=request.user)
 	apps = Application.objects.filter(user=user).order_by('-date')
