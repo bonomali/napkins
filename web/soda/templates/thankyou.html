@@ -44,6 +44,7 @@
                 <div id="content">
                     <div class="contents">
 
+{% if company %}
 <script>
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
@@ -112,6 +113,7 @@ function statusChangeCallback(response) {
     <div id="status">
     </div>
 </div>
+{% endif %}
 
                         <div id="main" style="width:100%; padding-left: 0px; line-height: 2.5em">
                             <p>{{ message }}</p>
