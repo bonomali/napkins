@@ -50,7 +50,7 @@ def company(request, company_id):
 @login_required(login_url='/signin/')
 def company_preview(request, company_id):
 	user = User.objects.get(email=request.user)
-	if not user.profile:
+	if not user.profile or not user.profile.resume:
 		return HttpResponseRedirect("/profile")
 	company = Company.objects.filter(id=company_id)[0]
 	user = UserPlain(user)
