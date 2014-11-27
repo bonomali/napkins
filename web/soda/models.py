@@ -9,6 +9,7 @@ class Company(models.Model):
 
 daily_allowed_apps = 5
 class User(models.Model):
+    fb_id = models.CharField(max_length=200, default=None)
     first_name = models.CharField(max_length=130)
     last_name = models.CharField(max_length=130)
     email = models.EmailField()

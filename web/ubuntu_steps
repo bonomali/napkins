@@ -1,6 +1,18 @@
+sudo apt-get update
+sudo apt-get install git
+sudo apt-get install python-setuptools python-dev build-essential 
+sudo apt-get install python-pip
+sudo apt-get install libmysqlclient-dev python-dev
+git clone https://github.com/jxieeducation/jobvite2.0.git
+cd jobvite2.0/web
+sudo pip install -r requirements.txt
+
 sudo apt-get install mysql-server
 sudo service mysql restart
-sudo apt-get install libmysqlclient-dev python-dev
-sudo pip install MySQL-python
 create database soda DEFAULT CHARACTER SET utf8;
 alter table auth_user modify username varchar(255);
+
+sudo apt-get install firefox
+sudo apt-get install xvfb
+sudo Xvfb :10 -ac
+export DISPLAY=:10

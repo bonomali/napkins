@@ -10,8 +10,11 @@ urlpatterns = patterns('',
     url(r'^apply/(?P<company_id>[-\w]+)/$', views.apply, name="apply"),
     url(r'^profile/$', views.profile, name="profile"),
     url(r'^coverletter/$', views.coverletter, name="coverletter"),
-	url(r'^signup/$', views.signup, name="signup"),
-	url(r'^signin/$', views.signin, name="signin"),
+    url(r'^signup/$', views.signup, name="signup"),
+
+    # url(r'^fb_signup/(?P<fb_id>[-\w]+)/$', views.fb_signup, name="signup"),
+
+    url(r'^signin/$', views.signin, name="signin"),
     url(r'^logout/$', views.logout, name="logout"),
     url(r'^history/$', views.history, name="history"),
     url(r'^confirm_app/$', views.confirm_app, name="confirm_app"),
