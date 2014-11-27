@@ -105,6 +105,7 @@ def signup(request):
 			our_user = User(fb_id=fb_id, first_name=first_name, last_name=last_name, email=email, password=password)
 			our_user.save()
 			user = auth.authenticate(username=email, password=password)
+			auth.login(request, user)
 			return HttpResponseRedirect('/search')
         return HttpResponseRedirect('/signup')
 
