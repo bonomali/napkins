@@ -12,7 +12,8 @@ urlpatterns = patterns('',
     url(r'^coverletter/$', views.coverletter, name="coverletter"),
     url(r'^signup/$', views.signup, name="signup"),
 
-    # url(r'^fb_signup/(?P<fb_id>[-\w]+)/$', views.fb_signup, name="signup"),
+    url(r'^fb_signin/$', views.fb_signin, name="fbsignin1"),
+    url(r'^fb_signin/(?P<fb_id>[-\w]+)/$', views.fb_signin, name="fbsignin2"),
 
     url(r'^signin/$', views.signin, name="signin"),
     url(r'^logout/$', views.logout, name="logout"),

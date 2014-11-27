@@ -105,9 +105,24 @@ def signup(request):
 			our_user = User(fb_id=fb_id, first_name=first_name, last_name=last_name, email=email, password=password)
 			our_user.save()
 			user = auth.authenticate(username=email, password=password)
-			auth.login(request, user)
+			if user is not None:
+				auth.login(request, user)
 			return HttpResponseRedirect('/search')
-        return HttpResponseRedirect('/signup')
+		return HttpResponseRedirect('/signup')
+
+
+def fb_signin(request, fb_id=None):
+	if not fb_id:
+		context = {}
+		return render(request, 'fb_signin.html', context)
+	else:
+		user = User.objects.filter(fb_id=fb_id)
+		if user:
+			user = user[0]
+			user = auth.authenticate(username=user.email, password=user.password)
+			auth.login(request, user)
+			return HttpResponseRedirect('/search/')
+
 
 def signin(request):
 	if request.method == 'GET':
