@@ -46,6 +46,7 @@
 
 {% if company %}
 <script>
+alert("Thank you for applying to {{company.name}}. If you would like additional application credits, visit the dashboard and message a friend about Napkins.");
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
         //make fb login button disappear
