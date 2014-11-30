@@ -45,79 +45,81 @@
         <main class="index" role="main">
             <div class="index-container">
                 <p class="lead" style="color: #888 !important">Sign Up</p>
+                <script>
+                  function statusChangeCallback(response) {
+                    if (response.status === 'connected') {
+                        fb_id = response.authResponse.userID;
+                        //now show the invisible form
+                        document.getElementById('form').style.display="block";
+                        //make fb login button disappear
+                        document.getElementById('fb').style.display="None";
+                        //fill in the fb id
+                        document.getElementById('id_fb_id').value = fb_id;
+                        setup();
+                    } else if (response.status === 'not_authorized') {
+                      document.getElementById('status').innerHTML = 'Please log ' +
+                        'authorize Napkins.';
+                    } else {
+                      document.getElementById('status').innerHTML = 'Please log ' +
+                        'into Facebook to register.';
+                    }
+                  }
 
-<script>
-  function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-        fb_id = response.authResponse.userID;
-        //now show the invisible form
-        document.getElementById('form').style.visibility="visible";
-        //make fb login button disappear
-        document.getElementById('fb').style.display="None";
-        //fill in the fb id
-        document.getElementById('id_fb_id').value = fb_id;
-    } else if (response.status === 'not_authorized') {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
+                  function checkLoginState() {
+                    FB.getLoginStatus(function(response) {
+                      statusChangeCallback(response);
+                    });
+                  }
 
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+                  window.fbAsyncInit = function() {
+                  FB.init({
+                    appId      : '1500765426863172',
+                    cookie     : true,  // enable cookies to allow the server to access 
+                                        // the session
+                    size       : 'xlarge',
+                    xfbml      : true,  // parse social plugins on this page
+                    version    : 'v2.1' // use version 2.1
+                  });
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1500765426863172',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.1' // use version 2.1
-  });
+                  FB.getLoginStatus(function(response) {
+                    statusChangeCallback(response);
+                  });
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+                  };
 
-  };
+                  // Load the SDK asynchronously
+                  (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));
+                </script>
 
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+                <div id='fb'>
+                    <fb:login-button data-size="large" scope="public_profile,email,publish_actions" onlogin="checkLoginState();">
+                    </fb:login-button>
 
+                    <div id="status" style="color: #aaa; margin-top: 20px">
+                    </div>
+                </div>
 
-<div id='fb'>
-    <fb:login-button scope="public_profile,email,publish_actions" onlogin="checkLoginState();">
-    </fb:login-button>
-
-    <div id="status">
-    </div>
-</div>
-
-
-                <form action="/signup/" method="post" id="form" style="visibility:hidden;">
+                <form action="/signup/" method="post" id="form" style="display: none;">
                 {% csrf_token %}
                     {% for field in form %}
                         {% if field.name == "password" %}
                             <input class="form-control signup-field" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% elif field.name == "fb_id" %}
-                            <input class="form-control signup-field" style="visibility:hidden;" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
+                            <input class="form-control signup-field" style="display: none;" type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% else %}
                             <input class="form-control signup-field" type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}">
                         {% endif %}
                     {% endfor %}
                     <input type="submit" class="signup-button btn btn-outline-inverse btn-lg" value="Sign Up" />
+                    <script>
+                        setup();
+                    </script>
                 </form>
             </div>
         </main>
